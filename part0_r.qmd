@@ -1,0 +1,253 @@
+---
+title: "First hands on R"
+format: html
+editor: visual
+toc: true
+toc-title: ""
+toc-location: right
+---
+
+```{r, echo=F,eval=T,message=F,warning=F}
+packages <- c("ggplot2", "readxl", "dplyr", "tidyr","xtable")
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+## Roadmap
+
+For this first part, we are going to
+
+1.  Download R and Rstudio
+2.  Discover the software
+3.  Dig into the `tidyverse` environment
+
+## What is R? Set-up and launch
+
+R is a free and open-source software used in many contexts: data cleaning, data visualisation, econometrics, machine and deep learning, among others. It is supported by a lively and active user community. R is an **object-based** language, meaning that we are going to manipulate objects through a series of commands.
+
+R can be used directly from a command terminal, but we prefer to use RStudio, an IDE, to make our lifes easier. An IDE is an interface that eases the use of a software. The most popular one is `RStudio`. To use it, we need to:
+
+1.  Download R
+2.  Then, download RStudio
+
+> You can download both from here <https://posit.co/download/rstudio-desktop/>.
+
+## General best practices
+
+Before jumping to coding *per se*, let me recall you some best practices when performing computer-based tasks. Knowing those practices is relevant for several reasons:
+
+-   Save yourself time in the future: it might me bothersome at first, but the future you will thank the current you
+-   Research reproducibility is a high-stake aspect of research
+-   IT is probably more pleasant to work in a tidy and clean environment than in a messy one
+
+### Folder organization
+
+Computers are organized around folders. We are going to work in a working directory (`wd`), but we need to identify it. My folder tree looks like it:
+
+``` plaintext
+/Users/mmoglia/Dropbox/
+├── Documents/
+│   ├── perso/
+│   │   ├── banque/
+│   │   ├── admin/
+│   │   └── festival/
+├── Downloads/
+├── Music/
+├── Pictures/
+│   ├── famille/
+│   ├── vacances/
+└── courses/
+│   ├── polytechnique/
+|   |   ├── 2024_eco102/
+|   |   ├── 2025_eco1s002/
+|   |   ├── 2026_eco51423ep/
+├── research/
+```
+
+Here we are going to work in `~/courses/2026_eco51423ep/`. This folder may (and should!) contains subfolders, for instance: `/code`, `/output`, `/raw_data`, etc. Each time I start a project, I always create those ones -- with a similar naming conventions in all my projects. I stick to these rules to save time when navigating between projects (and when changing computers).
+
+### Naming convention
+
+A typical tip is to choose simple and short titles for the files and the scripts. For instance, this file is named `part0_r.qmd`. Your code can be named `code_tutorial.R`. It should be self-explanatory.
+
+::: callout-tip
+Avoid at all cost to use spaces or special characters in your file names. Prefer instead an underscore.
+:::
+
+### When writing code
+
+-   **Always** comment your code, make it readable for your future self but also for others. You may use your code in a week, a month, a year, and should be able to directly understands it! Comments in R starts with `#`.
+
+-   When creating objects, functions, or whatever, give it simple but understandable names.
+
+-   For instance, if you create a data frame containing wages for individuals aged between 25 and 30, you way call it `wage_25_30` and not `w2530` (too short) or `wage_individuals_aged_25_30` (too long).
+
+-   Moreover, especially for large project, you want to have different scripts. Always keep scripts short and with clear names. For instance `1_clean_data.R`, `2_import_wages.R`, `3_merge_datasets.R`, and `4_data_analysis.R`.
+
+## First step in R/Rstudio
+
+### Some useful terms
+
+-   So far, we talked about `script`.
+
+-   We are going to manipulate `objects` using `functions`.
+
+-   Objects can be of different `classes`: matrix, vector, character, numeric, data.frame, etc. Some functions are already in `R` but some are not. Hence, we need to load them thanks to `packages`.
+
+### Open a script
+
+-   We are going to create our first script (the extension is `.R`).
+
+-   This script contains all commands you want to run. R has built-in functions but most useful functions should be called using `library()`.
+
+-   These libraries should be first downloaded then loaded into your project.
+
+-   First, open RStudio and opens a new script.
+
+-   You should have an empty page. You may want to write some words at the top of it to have an idea of what this code does. You can use `#` to comment code.
+
+### Seek for help and documentation
+
+To know more about a function, simply type `?function` in the console. Of course, internet is your friend, and ChatGPT (or any other LLMs) are pretty good at R. As I learnt how to use R in the LLM-era, I, of course, prefer to use Stack or other online forums instead!
+
+### Script
+
+```{r}
+#| echo: true
+#-------------------------------------------------------------------------------
+# This script opens a dataset and proceeds
+# to data visualization.
+#
+# Author: Matéo Moglia
+# Date: 12/02/2025
+#-------------------------------------------------------------------------------
+
+# Set your working directory
+setwd("C:/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep")
+path <- "/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep"
+```
+
+Here, I set the working directory using `setwd()`. Notice that we created our first object, named `path` using the assignment operator `<-` (I personally prefer to use `=` which works exactly the same). This object will turn out to be useful later on.
+
+::: callout-tip
+What is the class of `path`? **Hint: use the function `class()`**
+:::
+
+### Our first data manipulation
+
+We can load a very famous built-in data set, the `iris` dataset, into an object called `data`.
+
+```{r}
+#| echo: true
+data = iris # Attribute to data the data set iris
+class(data) # Check its class
+head(data) # Preview the first lines of data
+```
+
+Notice that the two objects we created so far can be seen in the Environment pane.
+
+### Data description
+
+By clicking on the object in the `Environement` panel, you can visualize it, but you can also write some code to describe it. As we just check, `data` is a `data.frame` object. It is made of several columns and rows.
+
+To call a specific column in a dataframe, we use the `$` operator. To know all the column names in `data`, we can use the function `names()`. To know the "size" of the dataframe, the right function is `dim()`: the first element is the number of rows and the second the number of columns.
+
+::: callout-tip
+You can also call a column by its position in the dataframe. For instance, to call the second column you can type `data[,2]`. For the second row: `data[,2]`. What should you write to print the 10th element of the 3rd column?
+:::
+
+To describe the data, we can use several built-in functions.
+
+```{r}
+#| echo: true
+table(data$Species) # To make a frequency table
+summary(data$Sepal.Length) # To provide summary statistics
+```
+
+Now, we want to visualize the data. To do so, we can use base R function `plot()`. It takes at least one argument, on the `x` axis. Here, with two arguments, it plots a simple scatter plot.
+
+```{r}
+#| echo: true
+plot(iris$Sepal.Length,iris$Sepal.Width)
+```
+
+## The `tidyverse`
+
+### Why and how use it?
+
+There are several ways to code in R. The first one, as we just saw, is called "base R". Although useful to perform very simple task, it becomes inefficient for more difficult tasks. The most popular approach in the R community is by far the tidyverse approach. The idea is simple: we are going to apply a series of functions on an object to modify it or create a new object.
+
+Its popularity arises from two important factors: it is simple and straightforward to understand and it is faster than base R. A third approach is `data.table`. It is the fastest approach but requires a high entry cost and is not straightforward.
+
+To use it, we can download the package `dplyr` and load it into our session. You need to download the package once (as long as you keep the same computer) but to load it each time you open RStudio. This is true for *all* packages. Note that all the function from the `base` package are natively loaded into R.
+
+```{r, eval = F}
+install.packages("dplyr") # Notice the quotation marks
+library(dplyr) # Notice the absence of quotation marks
+```
+
+:::callout-tip
+Most of time, a function exists only in one package. However, it occurs that two packages load functions with the same name. To make sure you use the function from the desired package, you can use the `package::function()` syntax. In my research, I usually have to deal with that with the function `select()` that is loaded in `dplyr` and in `sf` (a package for spatial data manipulation). Hence, if both packages are loaded and I want to use the one from `dplyr`, I have to write `dplyr::select()`.
+:::
+
+### General philosophy
+
+Each function are going to be separated by a pipe operator `%>%`. The idea is as following. We apply on the object `data` several functions in order to create a new data object, `new_data`. These functions, for instance, create a new column, slice the data, drop the duplicates, remove the missing values, group the data by group, change the type of column (for numeric to character), compute summary statistics, etc.
+
+```{r, eval = F}
+new_data = data %>%
+    function1(col) %>%
+    function2(col) %>%
+    function3(col)
+```
+
+Below, I list the most common `dplyr` functions.
+
+| Function      | Description                              |
+|---------------|------------------------------------------|
+| `filter()`    | Select rows that meet certain conditions |
+| `select()`    | Pick specific columns from a data frame  |
+| `arrange()`   | Reorder rows by column values            |
+| `mutate()`    | Create or modify columns                 |
+| `summarise()` | Collapse data into summary statistics    |
+| `group_by()`  | Define groups for grouped operations     |
+| `join()`      | Combine datasets by matching keys        |
+| `distinct()`  | Keep only unique rows                    |
+| `rename()`    | Change column names                      |
+| `slice()`     | Select rows by position                  |
+
+::: callout-tip
+## Exercise
+
+Using the `data` dataframe, create a sub-dataset `new_data` such that:
+
+-   It contains only the species *setosa*
+
+-   The column `Sepal.Length` is now named `sepal_length`
+
+-   It contains a new column `large_width` which takes 1 if the sepal width is bigger than 3 (hint: use an `ifelse(cond,yes,false)` function)
+:::
+
+```{r, echo = F, eval = T}
+new_data = iris %>%
+    filter(Species == "setosa") %>%
+    rename("sepal_length" = "Sepal.Length") %>%
+    mutate(large_width = ifelse(Sepal.Width >= 3, 1, 0))
+```
+
+Now, we want to simply print the number of observations for each value of `large_width`. To do so:
+
+```{r, eval = T}
+new_data %>%
+    group_by(large_width) %>% 
+    summarize(count = n())
+```
+
+::: callout-tip
+You can try with other summarizing function. For instance: `summarize(mean = mean(Sepal.Width))`.
+:::

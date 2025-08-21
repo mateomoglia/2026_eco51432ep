@@ -1,0 +1,985 @@
+[
+  {
+    "objectID": "home.html",
+    "href": "home.html",
+    "title": "Welcome to this class!",
+    "section": "",
+    "text": "This website will walk you through the tutorials for the Introduction to R course of Ecole Polytechnique’s Master program. The course has 3 main objectives: (i) know the basics of R (ii) manipulate the standard statistical and empirical tools (iii) make appealing output.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "home.html#class-outline",
+    "href": "home.html#class-outline",
+    "title": "Welcome to this class!",
+    "section": "Class outline",
+    "text": "Class outline\n\nPart 0: First hand on R\n\nDiscover R and its IDE, RStudio\ntidyverse environment and packages\n\nPart 1: Open data\n\nOpen and manipulate data\n\nPart 2: Descriptive statistics\n\nCompute descriptive statistics\nExport them in .tex\nLinear regression\n\nPart 3: Data visualization\n\nScatter plots\nBar and pie charts\nLinear regression\nMaps\nInteractive plots\n\n\nDuring sessions, I will walk you through all materials covered here. I provide some exercises that you are required to perform.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "home.html#about-this-site-and-my-inspirations",
+    "href": "home.html#about-this-site-and-my-inspirations",
+    "title": "Welcome to this class!",
+    "section": "About this site and my inspirations",
+    "text": "About this site and my inspirations\nI created this site for teaching purpose. It is of course perfectible and any constructive comment is more than welcome (write me an email!). I took inspiration from these sources:\n\nThe great Florian Oswald teaching material at Sciences Po. Do not hesitate to check his teaching material (in English)\nThe tutorials of the French Ministry of Ecology (in French)\nThe infamous online book Econometrics with R (in English)",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "2025_intro_r.html",
+    "href": "2025_intro_r.html",
+    "title": "Introduction to R",
+    "section": "",
+    "text": "Welcome to the Intro to R course!\n\n8 hours of class to learn how to do simple statistical tasks in R\nNo exam, only in-class (non-graded) exercises\nUse of real world data (from Ile-de-France region)"
+  },
+  {
+    "objectID": "2025_intro_r.html#introduction-to-r",
+    "href": "2025_intro_r.html#introduction-to-r",
+    "title": "Introduction to R",
+    "section": "",
+    "text": "Welcome to the Intro to R course!\n\n8 hours of class to learn how to do simple statistical tasks in R\nNo exam, only in-class (non-graded) exercises\nUse of real world data (from Ile-de-France region)"
+  },
+  {
+    "objectID": "2025_intro_r.html#presentation",
+    "href": "2025_intro_r.html#presentation",
+    "title": "Introduction to R",
+    "section": "Presentation",
+    "text": "Presentation\n\nPhD student in Economics in CREST - Institut Polytechnique de Paris\nInterest in spatial economics (geographical distribution of economic activity in space)\nThree areas of interest: population ageing, desindustrialization, climate change"
+  },
+  {
+    "objectID": "2025_intro_r.html#general-tips",
+    "href": "2025_intro_r.html#general-tips",
+    "title": "Introduction to R",
+    "section": "General tips",
+    "text": "General tips\n\nHave an intuitive workflow\n/Users/mmoglia/Dropbox/\n                      ├── Documents/\n                      │   ├── perso/\n                      ├── Downloads/\n                      ├── Music/\n                      ├── Pictures/\n                      │   ├── famille/\n                      │   ├── vacances/\n                      ├── courses/\n                      │   ├── polytechnique/\n                      │   │ ├── 2026_eco51432ep/\n                      │   │ │       ├── code/\n                      │   │ │       ├── output/\n                      │   │ │       ├── raw/\n                      │   │ │       ├── temp/\n                      │   │ ├── 2025_eco1s002/\n                      ├── research/"
+  },
+  {
+    "objectID": "2025_intro_r.html#general-tips-1",
+    "href": "2025_intro_r.html#general-tips-1",
+    "title": "Introduction to R",
+    "section": "General tips",
+    "text": "General tips\n\nResearch has to be replicable\n\nTrack source of every dataset you access with a link and a date\nWrite (and save!) all codes you use to produce output\nComment, annotate, code\nMake stuff self-explanatory for the future you!\n\n\n\n\n\n\n\nTip\n\n\n\nMore and more journals and institutions require authors to provide replication packages, containing all codes and data, from 0 to the final output."
+  },
+  {
+    "objectID": "2025_intro_r.html#general-tips-2",
+    "href": "2025_intro_r.html#general-tips-2",
+    "title": "Introduction to R",
+    "section": "General tips",
+    "text": "General tips\n\nAdvice for dissemination\n\nUse colorblind-friendly color palettes\nMake labelling self-explanatory\nALWAYS put a legend\nCheck the quality of the output (not blurry, large enough font)\nUse LaTeX! 😬"
+  },
+  {
+    "objectID": "2025_intro_r.html#what-is-r",
+    "href": "2025_intro_r.html#what-is-r",
+    "title": "Introduction to R",
+    "section": "What is R?",
+    "text": "What is R?\n\nR is a free and open source software widely used in quantitative social sciences, engineering, statistics, and other scientific fields\nR is a language and can be called from many IDEs (for instance, VSCode) or directly from the command panel\nWe are going to use RStudio, an IDE provided by POSIT\nObject-based software. Objects are usually sort of matrices, with columns and rows\n\n\n\n\n\n\n\nImportant\n\n\n\nEveryone of you should have it on your computer, ready to use"
+  },
+  {
+    "objectID": "2025_intro_r.html#what-are-we-going-to-do",
+    "href": "2025_intro_r.html#what-are-we-going-to-do",
+    "title": "Introduction to R",
+    "section": "What are we going to do",
+    "text": "What are we going to do\nThe plan is as following:\n\nPresent the dataset\nOpen it in R\nData cleaning\nData visualization\nStatistical analysis\n[Bonus] Geographical data visualization"
+  },
+  {
+    "objectID": "2025_intro_r.html#data-presentation",
+    "href": "2025_intro_r.html#data-presentation",
+    "title": "Introduction to R",
+    "section": "Data presentation",
+    "text": "Data presentation\nData are at the municipal level for the Ile-de-France region in contemporaneous years. They contain several socio-demographic variables.\n\n\nVariables used in the analysis1\n\n\n\n\n\n\n\n\nVariable name\nDescription\nSource\nYear\n\n\n\n\ncodgeo\nCOG\nINSEE\n2022\n\n\narea\nArea (km2)\nIGN\nNA\n\n\npolitical\nPolitical partisanship of the mayor\nMinistry of Interior\n2022\n\n\nmedical\nGeneral practitionners\nFINESS\n2022\n\n\nschools\nSchools\nBPE\n2022\n\n\nmed_inc\nMedian income (in euro)\nFilosofi\n2020\n\n\nunemp\nUnemployment rate (15-64)\nRP\n2021\n\n\nscol\nSchooling rate (2-5)\nMinistry of Education\n2021\n\n\npoor\nPoverty rate (&lt;60% median)\nFilosofi\n2020\n\n\nhousing_unit\nNumber of housing units\nRP\n2021\n\n\npop_00_10\nPop. (01-10)\nINSEE\n2021\n\n\npop_10_20\nPop. (11-20)\nINSEE\n2021\n\n\npop_20_30\nPop. (21-30)\nINSEE\n2021\n\n\npop_30_40\nPop. (31-40)\nINSEE\n2021\n\n\npop_40_50\nPop. (41-50)\nINSEE\n2021\n\n\npop_50_60\nPop. (51-60)\nINSEE\n2021\n\n\npop_60_70\nPop. (61-70)\nINSEE\n2021\n\n\npop_70_80\nPop. (71-80)\nINSEE\n2021\n\n\npop_80_90\nPop. (81-90)\nINSEE\n2021"
+  },
+  {
+    "objectID": "2025_intro_r.html#data-presentation-1",
+    "href": "2025_intro_r.html#data-presentation-1",
+    "title": "Introduction to R",
+    "section": "Data presentation",
+    "text": "Data presentation\n\nSome remarks on the data\n\nData are identified at the municipal level with codgeo\n\n\n\n\n\n\n\nWarning\n\n\n\nThe codgeo, from the Code Officiel Geographique (COG) is different from the zip code. For instance, Paris 14’s codgeo is 75114 whereas the zipcode is 75014.\n\n\n\nData are from administrative sources, they can be trusted\nThey come in a nice format because I cleaned them beforehand, this is not always the case!\nData are in .csv format. Do you all know what this is?\nYou can download them (here)[link to moodle] and save it in ./2026_eco51432ep/raw/"
+  },
+  {
+    "objectID": "2025_intro_r.html#first-hand-in-r",
+    "href": "2025_intro_r.html#first-hand-in-r",
+    "title": "Introduction to R",
+    "section": "First hand in R",
+    "text": "First hand in R\n\nSet-up R\n\nYou will write everything in a script and run from that script\nBase R contains a lot of handy built-in functions, but we are going to use tidyverse environment, the most widely used package in R\nIt is very intuitive to use:\n\nApply functions to an object\nThose functions can be applied in chain thanks to a pipe %&gt;%\n\n\nYour task:\n\nOpen RStudio\nOpen a new script\nPrepare it with the following presentation\n\n\n\n#_______________________________________________________________________________\n#\n#     This script opens the dataset for the \"Introduction to R class and manipulate it\n#     \n#     Mateo Moglia, July 2025\n#\n#_______________________________________________________________________________\n\n      rm(list=ls())\n      gc()\n      \n      # Install and load the packages dplyr, ggplot2, and sf\n      install.packages(\"dplyr\")\n      install.packages(\"ggplot2\")\n      install.packages(\"sf\")\n      library(dplyr)\n      library(ggplot2)\n      library(sf)\n      \n      # Create an object that \"stores\" the path\n      path      = \"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002\""
+  },
+  {
+    "objectID": "2025_intro_r.html#open-the-dataset",
+    "href": "2025_intro_r.html#open-the-dataset",
+    "title": "Introduction to R",
+    "section": "Open the dataset",
+    "text": "Open the dataset\n\nTo open the dataset we use the built-in function read.csv2()\nTo avoid rewriting the path each time we call it, we are going to use the function paste0 to concatenate the path and other words\n\n\n    database = read.csv2(paste0(path,\"/raw/idf_data_2022.csv\"))"
+  },
+  {
+    "objectID": "2025_intro_r.html#describe-the-dataset",
+    "href": "2025_intro_r.html#describe-the-dataset",
+    "title": "Introduction to R",
+    "section": "Describe the dataset",
+    "text": "Describe the dataset\n\nThere are several built-in functions to describe the dataset such as summary(), head(), length(), class(), names()\nTo call a specific column, two options:\n\nUsing the $ operator, eg database$pop_00_10\nUsing their position, eg database[4] call the fourth column of the data frame\n\n\n\n\n\n\n\n\nYour task\n\n\n\nPrint the column names and summarize some of them. What do you notice?"
+  },
+  {
+    "objectID": "2025_intro_r.html#first-data-manipulation",
+    "href": "2025_intro_r.html#first-data-manipulation",
+    "title": "Introduction to R",
+    "section": "First data manipulation",
+    "text": "First data manipulation\n\nCompute total population and density\n\nWe create a new dataset density containing 3 columns: the codgeo identifier, the total population pop_tot, and the population density.\nThen, we merge it to the database data frame\nWe need to do three tasks:\n\nMake the computations\nSelect the required columns\nAssign it to a new data object\nMerge it\n\n\n\n    density = database %&gt;%\n        # Use mutate() to create a new variable\n        mutate(tot_pop = pop_00_10 + pop_10_20 + pop_20_30 + pop_30_40 + pop_40_50 + pop_50_60 + pop_60_70 + pop_70_80 + pop_80_90) %&gt;%\n        mutate(density = tot_pop/area) %&gt;%\n        # Use select() to select the variables\n        select(codgeo, pop_tot, density)\n      \n    # Use left_join() to merge 'from the left' (keep all in database)\n    database = database %&gt;% left_join(density, by = \"codgeo\")\n\n\n\n\n\n\n\nTip\n\n\n\nWe could have directly computed density and tot_pop in database directly! Using a combination rowSums(), across(), and starts_with(), we can compute tot_pop more efficiently. Try it!"
+  },
+  {
+    "objectID": "2025_intro_r.html#summary-statistics",
+    "href": "2025_intro_r.html#summary-statistics",
+    "title": "Introduction to R",
+    "section": "Summary statistics",
+    "text": "Summary statistics\n\nTwo approaches\n\nCreate a new database with summarize()\nUse another package to export to .tex"
+  },
+  {
+    "objectID": "2025_intro_r.html#grouping-variables",
+    "href": "2025_intro_r.html#grouping-variables",
+    "title": "Introduction to R",
+    "section": "Grouping variables",
+    "text": "Grouping variables\n\nSummary statistics by group\n\nCreate an ID by department\nCreate new columns with dep. mean\nCompare the municipal variable with the dep. mean (boolean)"
+  },
+  {
+    "objectID": "2025_intro_r.html#our-first-data-visualization",
+    "href": "2025_intro_r.html#our-first-data-visualization",
+    "title": "Introduction to R",
+    "section": "Our first data visualization",
+    "text": "Our first data visualization\n\nScatter plot between mean income and population density\n\nStandard urban economics results: density increases income\nCorrelation? Causality?\nWe can investigate it!\nAdd line, change legend\nMake it by group (overlay and facet)"
+  },
+  {
+    "objectID": "2025_intro_r.html#correlation-heatmap",
+    "href": "2025_intro_r.html#correlation-heatmap",
+    "title": "Introduction to R",
+    "section": "Correlation heatmap",
+    "text": "Correlation heatmap\n\nHeatmap of correlation (see here https://albert-rapp.de/posts/ggplot2-tips/24_correlation_heat_map/24_correlation_heat_map.html)"
+  },
+  {
+    "objectID": "2025_intro_r.html#box-plot",
+    "href": "2025_intro_r.html#box-plot",
+    "title": "Introduction to R",
+    "section": "Box plot",
+    "text": "Box plot\n\nBox plot/violin by departement"
+  },
+  {
+    "objectID": "2025_intro_r.html#plotly",
+    "href": "2025_intro_r.html#plotly",
+    "title": "Introduction to R",
+    "section": "Plotly?",
+    "text": "Plotly?\n\nHeatmap of correlation (see here https://albert-rapp.de/posts/ggplot2-tips/24_correlation_heat_map/24_correlation_heat_map.html)"
+  },
+  {
+    "objectID": "2025_intro_r.html#regression",
+    "href": "2025_intro_r.html#regression",
+    "title": "Introduction to R",
+    "section": "Regression",
+    "text": "Regression\n\nMake a regression with fixest"
+  },
+  {
+    "objectID": "2025_intro_r.html#output-the-results",
+    "href": "2025_intro_r.html#output-the-results",
+    "title": "Introduction to R",
+    "section": "Output the results",
+    "text": "Output the results\n\nIn .pdf and in .tex"
+  },
+  {
+    "objectID": "2025_intro_r.html#maps",
+    "href": "2025_intro_r.html#maps",
+    "title": "Introduction to R",
+    "section": "Maps!",
+    "text": "Maps!\n\nHands on sf\n\nWhat is a shapefile? What information does it contain?\nMerge with the shapefile\nggplot empty shapefile\nadd information"
+  },
+  {
+    "objectID": "2025_intro_r.html#footnotes",
+    "href": "2025_intro_r.html#footnotes",
+    "title": "Introduction to R",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nDataset was prepared for this class out of several public access sources.↩︎"
+  },
+  {
+    "objectID": "part1_data.html",
+    "href": "part1_data.html",
+    "title": "Open data",
+    "section": "",
+    "text": "In this section, we are going to learn how to:\n\nOpen datasets\nPerform simple data cleaning tasks",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#roadmap",
+    "href": "part1_data.html#roadmap",
+    "title": "Open data",
+    "section": "",
+    "text": "In this section, we are going to learn how to:\n\nOpen datasets\nPerform simple data cleaning tasks",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#what-is-r-set-up-and-launch",
+    "href": "part1_data.html#what-is-r-set-up-and-launch",
+    "title": "Tutorial 1",
+    "section": "What is R? Set-up and launch",
+    "text": "What is R? Set-up and launch\nR is a free and open-source software used in many contexts: data cleaning, data visualisation, econometrics, machine and deep learning, among others.\nIt is supported by a lively and active user community. R is an object-based language, meaning that we are going to manipulate objects through a series of commands.\n\nR can be used directly from a command terminal, but we prefer to use RStudio, an IDE, to make our lifes easier. An IDE is an interface that eases the use of a software. The most popular one is RStudio. To use it, we need to:\n\nDownload R\nThen, download RStudio\n\n\nYou can download both from here https://posit.co/download/rstudio-desktop/.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#general-best-practices",
+    "href": "part1_data.html#general-best-practices",
+    "title": "Tutorial 1",
+    "section": "General best practices",
+    "text": "General best practices\nBefore jumping to coding per se, let me recall you some best practices when performing computer-based tasks.\n\n\nFolder organization\nComputers are organized around folder. We are going to work in a working directory (wd), but we need to identify it. My folder tree looks like it:\n/Users/mmoglia/Dropbox/\n├── Documents/\n│   ├── perso/\n│   │   ├── banque/\n│   │   ├── admin/\n│   │   └── festival/\n├── Downloads/\n├── Music/\n├── Pictures/\n│   ├── famille/\n│   ├── vacances/\n└── courses/\n│   ├── polytechnique/\n|   |   ├── 2024_eco102/\n|   |   ├── 2025_eco1s002/\n├── research/\nHere we are going to work in ~/courses/2025_eco1s002/. This folder may (and should!) contains subfolders, for instance: /code, /output, /raw_data, etc.\n\n\n\nNaming convention\nA typical tip is to choose simple and short titles for the files and the scripts. For instance, this file is named tutorial1.qmd. Your code can be named code_tutorial1.R. It should be self-explanatory.\n\n\n\n\n\n\nTip\n\n\n\nAvoid at all cost to use spaces or special characters in your file names. Prefer instead an underscore or a score.\n\n\n\n\n\nWhen writing code\n\nAlways comment your code, make it readable for your future self but also for others. You may use your code in a week, a month, a year, and should be able to directly understands it!\nWhen creating objects, functions, or whatever, give it simple but understandable names.\nFor instance, if you create a data frame containing wages for individuals aged between 25 and 30, you way call it wage_25_30 and not w2530 (too short) or wage_individuals_aged_25_30 (too long).\nMoreover, especially for large project, you want to have different scripts. Always keep scripts short and with clear names. For instance 1_clean_data.R, 2_import_wages.R, 3_merge_datasets.R, and 4_data_analysis.R.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-rrstudio",
+    "href": "part1_data.html#first-step-in-rrstudio",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nSome useful terms\n\nSo far, we talked about script.\nWe are going to manipulate object using functions.\nObjects can be of different classes: matrix, vector, character, numeric, data.frame, etc. Some functions are already in R but some are not. Hence, we need to load them thanks to packages.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-rrstudio-1",
+    "href": "part1_data.html#first-step-in-rrstudio-1",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOpen a script\n\nWe are going to create our first script (the extension is .R).\nThis script contains all commands you want to run. R has built-in functions but most useful functions should be called using library().\nThese libraries should be first downloaded then loaded into your project.\nFirst, open RStudio and opens a new script.\nYou should have an empty page. You may want to write some words at the top of it to have an idea of what this code does. You can use # to comment code.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-rrstudio-2",
+    "href": "part1_data.html#first-step-in-rrstudio-2",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nScript\n\n#-------------------------------------------------------------------------------\n# This script opens a dataset and proceeds\n# to data visualization.\n#\n# Author: Matéo Moglia\n# Date: 12/02/2025\n#-------------------------------------------------------------------------------\n\n# Set your working directory\nsetwd(\"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\")\npath &lt;- \"/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\"\n\nHere, I set the working directory using setwd(). Notice that we created our first object, named path using the assignment operator &lt;- (I personally prefer to use = which works exactly the same).\n\n\n\n\n\n\nTip\n\n\n\nWhat is the class of path? Hint: use the function class()",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-rrstudio-3",
+    "href": "part1_data.html#first-step-in-rrstudio-3",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first data manipulation\nWe can load a very famous built-in data set, the iris dataset, into an object called data.\n\ndata = iris # Attribute to data the data set iris\nclass(data) # Check its class\n\n[1] \"data.frame\"\n\nhead(data) # Preview the first lines of data\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\nNotice that the two objects we created so far can be seen in the Environment pane.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-rrstudio-4",
+    "href": "part1_data.html#first-step-in-rrstudio-4",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData description\nBy clicking on the object in the Environement panel, you can visualize it, but you can also write some code to describe it. As we just check, data is a data.frame object. It is made of several columns and rows.\nTo call a specific column in a dataframe, we use the $ operator. To know all the column names in data, we can use the function names(). To know the “size” of the dataframe, the right function is dim(): the first element is the number of rows and the second the number of columns.\n\n\n\n\n\n\nTip\n\n\n\nYou can also call a column by its position in the dataframe. For instance, to call the second column you can type data[,2]. For the second row: data[,2]. What should you write to print the 10th element of the 3rd column?\n\n\n\nTo describe the data, we can use several built-in functions.\n\ntable(data$Species) # To make a frequency table\n\n\n    setosa versicolor  virginica \n        50         50         50 \n\nsummary(data$Sepal.Length) # To provide summary statistics\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.300   5.100   5.800   5.843   6.400   7.900 \n\n\n\nNow, I want to visualize the data. To do so, we can use base R function plot:\n\nplot(iris$Sepal.Length,iris$Sepal.Width)",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-rrstudio-5",
+    "href": "part1_data.html#first-step-in-rrstudio-5",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first graph!\nWe can also use a very popular library for dataviz, ggplot2. First, we install it, then we load it, and we are going to be able to use it.\n\ninstall.packages(\"ggplot2\",repos = \"http://cran.us.r-project.org\")\nlibrary(ggplot2)\n\n\n\n\n\n\n\nNote\n\n\n\nAll packages have to be downloaded and loaded this way. Note that once you’ve downloaded a package on your computer, you do not need to install it but you still need to load it through the library function.\n\n\n\n\ng1 &lt;- ggplot(data = data, mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +\n  geom_point() +\n  theme_minimal()\ng1\n\n\n\n\n\n\n\n\nThis looks better! To produce this graph we used different information:\n\nThe ggplot command takes data and mapping as input.\n\ndata should be the dataset you want to visualize, here we named it data\nmapping takes aes (for aesthetics)\n\nHere, the aesthetics are the x and y axis, and the color one, to distinguish between the species.\n\ngeom_point allows to plot… points\ntheme_minimal makes the graph tidy, with a white background, etc.\n\n\n\nNow, we can save it:\n\nggsave(filename = paste0(path,\"/output/graph_iris.png\"),plot = g1)\n\nSaving 7 x 5 in image\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe function paste0 is useful to concatenate text. Here, instead of writing the full path, we concatenate the object path (which happens to be our path) and the end of the path, including the name of the output.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-rrstudio-6",
+    "href": "part1_data.html#first-step-in-rrstudio-6",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData: base vs. dplyr\nTo finish this -short- introduction to R, I introduce a new package, probably the most popular one in R: dplyr. As before, we install then load the library.\n\ninstall.packages(\"tidyverse\")\nlibrary(tidyverse)\n\n\nLet’s imagine we want to filter the dataset to keep only the setosa. In base R, we need to extract the lines of iris for which Species==\"setosa\". Because R is object based, we can multiple objects, here: base_setosa.\n\nThe data frame iris is close to a matrix, hence, we can extract using notations close to the matrix ones. Hence data[1,1] would give us the first line of the first column (in this order) of data. Here, we filt the lines using a condition: data$Species==\"setosa\". Do not forget the ,.\n\n\n# Base R: Filter rows where Species is \"setosa\"\nbase_setosa &lt;- data[data$Species == \"setosa\", ]\nhead(base_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nUsing dplyr and the pipe operator %&gt;%, we apply the function filter on Species.\n\n# dplyr: Filter rows where Species is \"setosa\"\ndplyr_setosa &lt;- iris %&gt;% \n  filter(Species == \"setosa\")\nhead(dplyr_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nNext, we can select specific columns.\n\n# Base R: Select only Sepal.Length and Sepal.Width columns\nbase_columns &lt;- iris[, c(\"Sepal.Length\", \"Sepal.Width\")]\nhead(base_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n# dplyr: Select only Sepal.Length and Sepal.Width columns\ndplyr_columns &lt;- iris %&gt;% \n  select(Sepal.Length, Sepal.Width)\nhead(dplyr_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n\n\n\n# Base R: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\niris$Sepal.Area &lt;- iris$Sepal.Length * iris$Sepal.Width\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n# dplyr: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\ndplyr_iris &lt;- iris %&gt;% \n  mutate(Sepal.Area = Sepal.Length * Sepal.Width)\nhead(dplyr_iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n\n\nThe advantage of dplyr is to allow for many computations:\n\ndplyr_grouped &lt;- iris %&gt;%\n  mutate(Sepal.Area = Sepal.Length * Sepal.Width) %&gt;%\n  mutate(is.Sepal.Large = ifelse(Sepal.Area &gt; median(Sepal.Area),1,0)) %&gt;% \n  group_by(Species) %&gt;%\n  summarize(mean_sepal_length = mean(Sepal.Length),\n            count_sepal_large = sum(is.Sepal.Large))\nprint(dplyr_grouped)\n\n# A tibble: 3 × 3\n  Species    mean_sepal_length count_sepal_large\n  &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;\n1 setosa                  5.01                21\n2 versicolor              5.94                18\n3 virginica               6.59                36\n\n\n\nThis dataset can be, of course represented visually:\n\nggplot(dplyr_grouped, aes(x = Species, y = count_sepal_large, fill = Species)) +\n  geom_bar(stat = \"identity\") +\n  labs(title = \"Histogram of Sepal Count by Species\",\n       x = \"Species\", y = \"Count of large sepals\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nBut we can also export it to LaTeX:\n\ninstall.packages(\"xtable\")\nlibrary(xtable)\n\n\ncolnames(dplyr_grouped) &lt;- c(\"Species\", \"Mean_Sepal_Length\", \"Count_Sepal_Large\")\nprint(xtable(dplyr_grouped), type = \"latex\", file = paste0(path,\"/output/sepal_large.tex\"))",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-latex",
+    "href": "part1_data.html#first-step-in-latex",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nWhat is LaTeX\nLaTeX is very popular software to produce scientic writings. It is relatively easy to use. From now on, it is mandatory to produce output you would hand using LaTeX. You have three options to use LaTeX:\n\nUse any text editor and compile the file using the console\nUse an IDE, like TexStudio or TexLive\nUse an online IDE like Overleaf\n\n\nThere are plenty of tutorials over the web (or ChatGPT) to know how to use LaTeX, so I am going to be quick.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-latex-1",
+    "href": "part1_data.html#first-step-in-latex-1",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nOverleaf\nOpen a blank project in Overleaf. It should look like that:\n\\documentclass{article}\n\n%% PREAMBULE ------------------\n\n\\usepackage{graphicx} % Required for inserting images\n\n%% METADATA -------------------\n\n\\title{Tutorial one}\n\\author{Matéo Moglia}\n\\date{February 2024}\n\n%% DOCUMENT START ------------\n\n\\begin{document}\n\n\\maketitle\n\n\\section{Introduction}\n\n\\end{document}\n\nThree elements are mandatory here: the \\documentclass{} call, the \\begin{document} and the \\end{docoment} parts. All texts should be these last two commands. The preambule is of high importance: it allows you to load packages to perform specific tasks. Here, graphicx is useful to input images. Other popular packages include:\n\ngeometry allows you to change the margins of the pages,\nbooktab to build nice-looking tables\ntikz to draw graphs directly in LaTeX\nxcolor to create and choose your favorite colors\n\nYou can then directly write any text you like after \\begin{document}.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-latex-2",
+    "href": "part1_data.html#first-step-in-latex-2",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nMath mode\nMost interesting is the math mode. You can write in line using $ x = y$ or in an equation environment:\n\\begin{equation}\n  \\mu_k = \\int_0^{+\\infty} x^k f(x) dx = \\int_0^{+\\infty} t^{-\\frac{k}{\\alpha}} \\exp ^{-t} dt\n\\end{equation}\n\n\n\n\n\n\nTip\n\n\n\nAn environment starts with \\begin{name} and ends with \\end{name}. The environment can be an equation, to center a large chunk of text, a figure, a table, etc.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-latex-3",
+    "href": "part1_data.html#first-step-in-latex-3",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (fig)\n\\begin{figure}\n  \\centering # To center the graph\n  \\includegraphics[width=8,height=10]{graph/graph_iris.png}\n  \\caption{Iris Sepals Length and Width}\n\\end{figure}\nWe work within the figure environment, center the graphic, include it with some options and add a caption. The graph should be uploaded in the project first! Here, I stored it in the folder graph.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-latex-4",
+    "href": "part1_data.html#first-step-in-latex-4",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (table)\nTo input the table, we can use \\input{}:\n\\input{table/sepal_large.tex}\nNo need to specify the environment as it was directly created by the xtable function earlier on!",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#first-step-in-latex-5",
+    "href": "part1_data.html#first-step-in-latex-5",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nCompile the file\n\nLaTeX is not a “What You See Is What You Get” software, like Word or Canvas.\n\n\nYou need to compile the code to obtain the results (usually a .pdf), that you can further download.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#quick-exercise",
+    "href": "part1_data.html#quick-exercise",
+    "title": "Tutorial 1",
+    "section": "Quick exercise",
+    "text": "Quick exercise\n\nOpen a new script, add the relevant information (path, date, packages) and load the swiss dataset\nCreate a grouping variable if Catholic is below median or under median\nUsing the dplyr syntax, compute the number of observations, the mean, median, and inter-quartile range of Fertility, Agriculture, and Education by group. Save as a .tex table.\nPlot the relation between Education and Infant.Mortality (ggplot2 syntax) for each group\n\nWith a scatter plot and lines that connects all points\nAdd a title and a subtitle (centered and in bold)\nPut the legend at the bottom of the slide\nExport as a .pdf\n\nExport everything in a TeX file",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part0_r.html",
+    "href": "part0_r.html",
+    "title": "First hands on R",
+    "section": "",
+    "text": "For this first part, we are going to\n\nDownload R and Rstudio\nDiscover the software\nDig into the tidyverse environment"
+  },
+  {
+    "objectID": "part0_r.html#roadmap",
+    "href": "part0_r.html#roadmap",
+    "title": "First hands on R",
+    "section": "",
+    "text": "For this first part, we are going to\n\nDownload R and Rstudio\nDiscover the software\nDig into the tidyverse environment"
+  },
+  {
+    "objectID": "part0_r.html#what-is-r-set-up-and-launch",
+    "href": "part0_r.html#what-is-r-set-up-and-launch",
+    "title": "First hands on R",
+    "section": "What is R? Set-up and launch",
+    "text": "What is R? Set-up and launch\nR is a free and open-source software used in many contexts: data cleaning, data visualisation, econometrics, machine and deep learning, among others. It is supported by a lively and active user community. R is an object-based language, meaning that we are going to manipulate objects through a series of commands.\nR can be used directly from a command terminal, but we prefer to use RStudio, an IDE, to make our lifes easier. An IDE is an interface that eases the use of a software. The most popular one is RStudio. To use it, we need to:\n\nDownload R\nThen, download RStudio\n\n\nYou can download both from here https://posit.co/download/rstudio-desktop/."
+  },
+  {
+    "objectID": "part0_r.html#general-best-practices",
+    "href": "part0_r.html#general-best-practices",
+    "title": "First hands on R",
+    "section": "General best practices",
+    "text": "General best practices\nBefore jumping to coding per se, let me recall you some best practices when performing computer-based tasks. Knowing those practices is relevant for several reasons:\n\nSave yourself time in the future: it might me bothersome at first, but the future you will thank the current you\nResearch reproducibility is a high-stake aspect of research\nIT is probably more pleasant to work in a tidy and clean environment than in a messy one\n\n\nFolder organization\nComputers are organized around folders. We are going to work in a working directory (wd), but we need to identify it. My folder tree looks like it:\n/Users/mmoglia/Dropbox/\n├── Documents/\n│   ├── perso/\n│   │   ├── banque/\n│   │   ├── admin/\n│   │   └── festival/\n├── Downloads/\n├── Music/\n├── Pictures/\n│   ├── famille/\n│   ├── vacances/\n└── courses/\n│   ├── polytechnique/\n|   |   ├── 2024_eco102/\n|   |   ├── 2025_eco1s002/\n|   |   ├── 2026_eco51423ep/\n├── research/\nHere we are going to work in ~/courses/2026_eco51423ep/. This folder may (and should!) contains subfolders, for instance: /code, /output, /raw_data, etc. Each time I start a project, I always create those ones – with a similar naming conventions in all my projects. I stick to these rules to save time when navigating between projects (and when changing computers).\n\n\nNaming convention\nA typical tip is to choose simple and short titles for the files and the scripts. For instance, this file is named part0_r.qmd. Your code can be named code_tutorial.R. It should be self-explanatory.\n\n\n\n\n\n\nTip\n\n\n\nAvoid at all cost to use spaces or special characters in your file names. Prefer instead an underscore.\n\n\n\n\nWhen writing code\n\nAlways comment your code, make it readable for your future self but also for others. You may use your code in a week, a month, a year, and should be able to directly understands it! Comments in R starts with #.\nWhen creating objects, functions, or whatever, give it simple but understandable names.\nFor instance, if you create a data frame containing wages for individuals aged between 25 and 30, you way call it wage_25_30 and not w2530 (too short) or wage_individuals_aged_25_30 (too long).\nMoreover, especially for large project, you want to have different scripts. Always keep scripts short and with clear names. For instance 1_clean_data.R, 2_import_wages.R, 3_merge_datasets.R, and 4_data_analysis.R."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-rrstudio",
+    "href": "part0_r.html#first-step-in-rrstudio",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nSome useful terms\n\nSo far, we talked about script.\nWe are going to manipulate objects using functions.\nObjects can be of different classes: matrix, vector, character, numeric, data.frame, etc. Some functions are already in R but some are not. Hence, we need to load them thanks to packages.\n\n\n\nOpen a script\n\nWe are going to create our first script (the extension is .R).\nThis script contains all commands you want to run. R has built-in functions but most useful functions should be called using library().\nThese libraries should be first downloaded then loaded into your project.\nFirst, open RStudio and opens a new script.\nYou should have an empty page. You may want to write some words at the top of it to have an idea of what this code does. You can use # to comment code.\n\n\n\nSeek for help and documentation\nTo know more about a function, simply type ?function in the console. Of course, internet is your friend, and ChatGPT (or any other LLMs) are pretty good at R. As I learnt how to use R in the LLM-era, I, of course, prefer to use Stack or other online forums instead!\n\n\nScript\n\n#-------------------------------------------------------------------------------\n# This script opens a dataset and proceeds\n# to data visualization.\n#\n# Author: Matéo Moglia\n# Date: 12/02/2025\n#-------------------------------------------------------------------------------\n\n# Set your working directory\nsetwd(\"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep\")\npath &lt;- \"/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep\"\n\nHere, I set the working directory using setwd(). Notice that we created our first object, named path using the assignment operator &lt;- (I personally prefer to use = which works exactly the same). This object will turn out to be useful later on.\n\n\n\n\n\n\nTip\n\n\n\nWhat is the class of path? Hint: use the function class()\n\n\n\n\nOur first data manipulation\nWe can load a very famous built-in data set, the iris dataset, into an object called data.\n\ndata = iris # Attribute to data the data set iris\nclass(data) # Check its class\n\n[1] \"data.frame\"\n\nhead(data) # Preview the first lines of data\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\nNotice that the two objects we created so far can be seen in the Environment pane.\n\n\nData description\nBy clicking on the object in the Environement panel, you can visualize it, but you can also write some code to describe it. As we just check, data is a data.frame object. It is made of several columns and rows.\nTo call a specific column in a dataframe, we use the $ operator. To know all the column names in data, we can use the function names(). To know the “size” of the dataframe, the right function is dim(): the first element is the number of rows and the second the number of columns.\n\n\n\n\n\n\nTip\n\n\n\nYou can also call a column by its position in the dataframe. For instance, to call the second column you can type data[,2]. For the second row: data[,2]. What should you write to print the 10th element of the 3rd column?\n\n\nTo describe the data, we can use several built-in functions.\n\ntable(data$Species) # To make a frequency table\n\n\n    setosa versicolor  virginica \n        50         50         50 \n\nsummary(data$Sepal.Length) # To provide summary statistics\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.300   5.100   5.800   5.843   6.400   7.900 \n\n\nNow, we want to visualize the data. To do so, we can use base R function plot(). It takes at least one argument, on the x axis. Here, with two arguments, it plots a simple scatter plot.\n\nplot(iris$Sepal.Length,iris$Sepal.Width)"
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-rrstudio-1",
+    "href": "part0_r.html#first-step-in-rrstudio-1",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOpen a script\n\nWe are going to create our first script (the extension is .R).\nThis script contains all commands you want to run. R has built-in functions but most useful functions should be called using library().\nThese libraries should be first downloaded then loaded into your project.\nFirst, open RStudio and opens a new script.\nYou should have an empty page. You may want to write some words at the top of it to have an idea of what this code does. You can use # to comment code."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-rrstudio-2",
+    "href": "part0_r.html#first-step-in-rrstudio-2",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nScript\n\n#-------------------------------------------------------------------------------\n# This script opens a dataset and proceeds\n# to data visualization.\n#\n# Author: Matéo Moglia\n# Date: 12/02/2025\n#-------------------------------------------------------------------------------\n\n# Set your working directory\nsetwd(\"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\")\npath &lt;- \"/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\"\n\nHere, I set the working directory using setwd(). Notice that we created our first object, named path using the assignment operator &lt;- (I personally prefer to use = which works exactly the same).\n\n\n\n\n\n\nTip\n\n\n\nWhat is the class of path? Hint: use the function class()"
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-rrstudio-3",
+    "href": "part0_r.html#first-step-in-rrstudio-3",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first data manipulation\nWe can load a very famous built-in data set, the iris dataset, into an object called data.\n\ndata = iris # Attribute to data the data set iris\nclass(data) # Check its class\n\n[1] \"data.frame\"\n\nhead(data) # Preview the first lines of data\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\nNotice that the two objects we created so far can be seen in the Environment pane."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-rrstudio-4",
+    "href": "part0_r.html#first-step-in-rrstudio-4",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData description\nBy clicking on the object in the Environement panel, you can visualize it, but you can also write some code to describe it. As we just check, data is a data.frame object. It is made of several columns and rows.\nTo call a specific column in a dataframe, we use the $ operator. To know all the column names in data, we can use the function names(). To know the “size” of the dataframe, the right function is dim(): the first element is the number of rows and the second the number of columns.\n\n\n\n\n\n\nTip\n\n\n\nYou can also call a column by its position in the dataframe. For instance, to call the second column you can type data[,2]. For the second row: data[,2]. What should you write to print the 10th element of the 3rd column?\n\n\n\nTo describe the data, we can use several built-in functions.\n\ntable(data$Species) # To make a frequency table\n\n\n    setosa versicolor  virginica \n        50         50         50 \n\nsummary(data$Sepal.Length) # To provide summary statistics\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.300   5.100   5.800   5.843   6.400   7.900 \n\n\n\nNow, I want to visualize the data. To do so, we can use base R function plot:\n\nplot(iris$Sepal.Length,iris$Sepal.Width)"
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-rrstudio-5",
+    "href": "part0_r.html#first-step-in-rrstudio-5",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first graph!\nWe can also use a very popular library for dataviz, ggplot2. First, we install it, then we load it, and we are going to be able to use it.\n\ninstall.packages(\"ggplot2\",repos = \"http://cran.us.r-project.org\")\nlibrary(ggplot2)\n\n\n\n\n\n\n\nNote\n\n\n\nAll packages have to be downloaded and loaded this way. Note that once you’ve downloaded a package on your computer, you do not need to install it but you still need to load it through the library function.\n\n\n\n\ng1 &lt;- ggplot(data = data, mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +\n  geom_point() +\n  theme_minimal()\ng1\n\n\n\n\n\n\n\n\nThis looks better! To produce this graph we used different information:\n\nThe ggplot command takes data and mapping as input.\n\ndata should be the dataset you want to visualize, here we named it data\nmapping takes aes (for aesthetics)\n\nHere, the aesthetics are the x and y axis, and the color one, to distinguish between the species.\n\ngeom_point allows to plot… points\ntheme_minimal makes the graph tidy, with a white background, etc.\n\n\n\nNow, we can save it:\n\nggsave(filename = paste0(path,\"/output/graph_iris.png\"),plot = g1)\n\nSaving 7 x 5 in image\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe function paste0 is useful to concatenate text. Here, instead of writing the full path, we concatenate the object path (which happens to be our path) and the end of the path, including the name of the output."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-rrstudio-6",
+    "href": "part0_r.html#first-step-in-rrstudio-6",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData: base vs. dplyr\nTo finish this -short- introduction to R, I introduce a new package, probably the most popular one in R: dplyr. As before, we install then load the library.\n\ninstall.packages(\"tidyverse\")\nlibrary(tidyverse)\n\n\nLet’s imagine we want to filter the dataset to keep only the setosa. In base R, we need to extract the lines of iris for which Species==\"setosa\". Because R is object based, we can multiple objects, here: base_setosa.\n\nThe data frame iris is close to a matrix, hence, we can extract using notations close to the matrix ones. Hence data[1,1] would give us the first line of the first column (in this order) of data. Here, we filt the lines using a condition: data$Species==\"setosa\". Do not forget the ,.\n\n\n# Base R: Filter rows where Species is \"setosa\"\nbase_setosa &lt;- data[data$Species == \"setosa\", ]\nhead(base_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nUsing dplyr and the pipe operator %&gt;%, we apply the function filter on Species.\n\n# dplyr: Filter rows where Species is \"setosa\"\ndplyr_setosa &lt;- iris %&gt;% \n  filter(Species == \"setosa\")\nhead(dplyr_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nNext, we can select specific columns.\n\n# Base R: Select only Sepal.Length and Sepal.Width columns\nbase_columns &lt;- iris[, c(\"Sepal.Length\", \"Sepal.Width\")]\nhead(base_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n# dplyr: Select only Sepal.Length and Sepal.Width columns\ndplyr_columns &lt;- iris %&gt;% \n  select(Sepal.Length, Sepal.Width)\nhead(dplyr_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n\n\n\n# Base R: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\niris$Sepal.Area &lt;- iris$Sepal.Length * iris$Sepal.Width\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n# dplyr: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\ndplyr_iris &lt;- iris %&gt;% \n  mutate(Sepal.Area = Sepal.Length * Sepal.Width)\nhead(dplyr_iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n\n\nThe advantage of dplyr is to allow for many computations:\n\ndplyr_grouped &lt;- iris %&gt;%\n  mutate(Sepal.Area = Sepal.Length * Sepal.Width) %&gt;%\n  mutate(is.Sepal.Large = ifelse(Sepal.Area &gt; median(Sepal.Area),1,0)) %&gt;% \n  group_by(Species) %&gt;%\n  summarize(mean_sepal_length = mean(Sepal.Length),\n            count_sepal_large = sum(is.Sepal.Large))\nprint(dplyr_grouped)\n\n# A tibble: 3 × 3\n  Species    mean_sepal_length count_sepal_large\n  &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;\n1 setosa                  5.01                21\n2 versicolor              5.94                18\n3 virginica               6.59                36\n\n\n\nThis dataset can be, of course represented visually:\n\nggplot(dplyr_grouped, aes(x = Species, y = count_sepal_large, fill = Species)) +\n  geom_bar(stat = \"identity\") +\n  labs(title = \"Histogram of Sepal Count by Species\",\n       x = \"Species\", y = \"Count of large sepals\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nBut we can also export it to LaTeX:\n\ninstall.packages(\"xtable\")\nlibrary(xtable)\n\n\ncolnames(dplyr_grouped) &lt;- c(\"Species\", \"Mean_Sepal_Length\", \"Count_Sepal_Large\")\nprint(xtable(dplyr_grouped), type = \"latex\", file = paste0(path,\"/output/sepal_large.tex\"))"
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-latex",
+    "href": "part0_r.html#first-step-in-latex",
+    "title": "First hands on R",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nWhat is LaTeX\nLaTeX is very popular software to produce scientic writings. It is relatively easy to use. From now on, it is mandatory to produce output you would hand using LaTeX. You have three options to use LaTeX:\n\nUse any text editor and compile the file using the console\nUse an IDE, like TexStudio or TexLive\nUse an online IDE like Overleaf\n\n\nThere are plenty of tutorials over the web (or ChatGPT) to know how to use LaTeX, so I am going to be quick."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-latex-1",
+    "href": "part0_r.html#first-step-in-latex-1",
+    "title": "First hands on R",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nOverleaf\nOpen a blank project in Overleaf. It should look like that:\n\\documentclass{article}\n\n%% PREAMBULE ------------------\n\n\\usepackage{graphicx} % Required for inserting images\n\n%% METADATA -------------------\n\n\\title{Tutorial one}\n\\author{Matéo Moglia}\n\\date{February 2024}\n\n%% DOCUMENT START ------------\n\n\\begin{document}\n\n\\maketitle\n\n\\section{Introduction}\n\n\\end{document}\n\nThree elements are mandatory here: the \\documentclass{} call, the \\begin{document} and the \\end{docoment} parts. All texts should be these last two commands. The preambule is of high importance: it allows you to load packages to perform specific tasks. Here, graphicx is useful to input images. Other popular packages include:\n\ngeometry allows you to change the margins of the pages,\nbooktab to build nice-looking tables\ntikz to draw graphs directly in LaTeX\nxcolor to create and choose your favorite colors\n\nYou can then directly write any text you like after \\begin{document}."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-latex-2",
+    "href": "part0_r.html#first-step-in-latex-2",
+    "title": "First hands on R",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nMath mode\nMost interesting is the math mode. You can write in line using $ x = y$ or in an equation environment:\n\\begin{equation}\n  \\mu_k = \\int_0^{+\\infty} x^k f(x) dx = \\int_0^{+\\infty} t^{-\\frac{k}{\\alpha}} \\exp ^{-t} dt\n\\end{equation}\n\n\n\n\n\n\nTip\n\n\n\nAn environment starts with \\begin{name} and ends with \\end{name}. The environment can be an equation, to center a large chunk of text, a figure, a table, etc."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-latex-3",
+    "href": "part0_r.html#first-step-in-latex-3",
+    "title": "First hands on R",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (fig)\n\\begin{figure}\n  \\centering # To center the graph\n  \\includegraphics[width=8,height=10]{graph/graph_iris.png}\n  \\caption{Iris Sepals Length and Width}\n\\end{figure}\nWe work within the figure environment, center the graphic, include it with some options and add a caption. The graph should be uploaded in the project first! Here, I stored it in the folder graph."
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-latex-4",
+    "href": "part0_r.html#first-step-in-latex-4",
+    "title": "First hands on R",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (table)\nTo input the table, we can use \\input{}:\n\\input{table/sepal_large.tex}\nNo need to specify the environment as it was directly created by the xtable function earlier on!"
+  },
+  {
+    "objectID": "part0_r.html#first-step-in-latex-5",
+    "href": "part0_r.html#first-step-in-latex-5",
+    "title": "First hands on R",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nCompile the file\n\nLaTeX is not a “What You See Is What You Get” software, like Word or Canvas.\n\n\nYou need to compile the code to obtain the results (usually a .pdf), that you can further download."
+  },
+  {
+    "objectID": "part0_r.html#quick-exercise",
+    "href": "part0_r.html#quick-exercise",
+    "title": "First hands on R",
+    "section": "Quick exercise",
+    "text": "Quick exercise\n\nOpen a new script, add the relevant information (path, date, packages) and load the swiss dataset\nCreate a grouping variable if Catholic is below median or under median\nUsing the dplyr syntax, compute the number of observations, the mean, median, and inter-quartile range of Fertility, Agriculture, and Education by group. Save as a .tex table.\nPlot the relation between Education and Infant.Mortality (ggplot2 syntax) for each group\n\nWith a scatter plot and lines that connects all points\nAdd a title and a subtitle (centered and in bold)\nPut the legend at the bottom of the slide\nExport as a .pdf\n\nExport everything in a TeX file"
+  },
+  {
+    "objectID": "part3_viz.html",
+    "href": "part3_viz.html",
+    "title": "Data visualisation",
+    "section": "",
+    "text": "In this part, we are going to learn how to:\n\nMake appealing data visualization with ggplot2 package\nIf time allows: make maps\nIf time allows: make interactive plots",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#roadmap",
+    "href": "part3_viz.html#roadmap",
+    "title": "Data visualisation",
+    "section": "",
+    "text": "In this part, we are going to learn how to:\n\nMake appealing data visualization with ggplot2 package\nIf time allows: make maps\nIf time allows: make interactive plots",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#what-is-r-set-up-and-launch",
+    "href": "part3_viz.html#what-is-r-set-up-and-launch",
+    "title": "Tutorial 1",
+    "section": "What is R? Set-up and launch",
+    "text": "What is R? Set-up and launch\nR is a free and open-source software used in many contexts: data cleaning, data visualisation, econometrics, machine and deep learning, among others.\nIt is supported by a lively and active user community. R is an object-based language, meaning that we are going to manipulate objects through a series of commands.\n\nR can be used directly from a command terminal, but we prefer to use RStudio, an IDE, to make our lifes easier. An IDE is an interface that eases the use of a software. The most popular one is RStudio. To use it, we need to:\n\nDownload R\nThen, download RStudio\n\n\nYou can download both from here https://posit.co/download/rstudio-desktop/.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#general-best-practices",
+    "href": "part3_viz.html#general-best-practices",
+    "title": "Tutorial 1",
+    "section": "General best practices",
+    "text": "General best practices\nBefore jumping to coding per se, let me recall you some best practices when performing computer-based tasks.\n\n\nFolder organization\nComputers are organized around folder. We are going to work in a working directory (wd), but we need to identify it. My folder tree looks like it:\n/Users/mmoglia/Dropbox/\n├── Documents/\n│   ├── perso/\n│   │   ├── banque/\n│   │   ├── admin/\n│   │   └── festival/\n├── Downloads/\n├── Music/\n├── Pictures/\n│   ├── famille/\n│   ├── vacances/\n└── courses/\n│   ├── polytechnique/\n|   |   ├── 2024_eco102/\n|   |   ├── 2025_eco1s002/\n├── research/\nHere we are going to work in ~/courses/2025_eco1s002/. This folder may (and should!) contains subfolders, for instance: /code, /output, /raw_data, etc.\n\n\n\nNaming convention\nA typical tip is to choose simple and short titles for the files and the scripts. For instance, this file is named tutorial1.qmd. Your code can be named code_tutorial1.R. It should be self-explanatory.\n\n\n\n\n\n\nTip\n\n\n\nAvoid at all cost to use spaces or special characters in your file names. Prefer instead an underscore or a score.\n\n\n\n\n\nWhen writing code\n\nAlways comment your code, make it readable for your future self but also for others. You may use your code in a week, a month, a year, and should be able to directly understands it!\nWhen creating objects, functions, or whatever, give it simple but understandable names.\nFor instance, if you create a data frame containing wages for individuals aged between 25 and 30, you way call it wage_25_30 and not w2530 (too short) or wage_individuals_aged_25_30 (too long).\nMoreover, especially for large project, you want to have different scripts. Always keep scripts short and with clear names. For instance 1_clean_data.R, 2_import_wages.R, 3_merge_datasets.R, and 4_data_analysis.R.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-rrstudio",
+    "href": "part3_viz.html#first-step-in-rrstudio",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nSome useful terms\n\nSo far, we talked about script.\nWe are going to manipulate object using functions.\nObjects can be of different classes: matrix, vector, character, numeric, data.frame, etc. Some functions are already in R but some are not. Hence, we need to load them thanks to packages.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-rrstudio-1",
+    "href": "part3_viz.html#first-step-in-rrstudio-1",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOpen a script\n\nWe are going to create our first script (the extension is .R).\nThis script contains all commands you want to run. R has built-in functions but most useful functions should be called using library().\nThese libraries should be first downloaded then loaded into your project.\nFirst, open RStudio and opens a new script.\nYou should have an empty page. You may want to write some words at the top of it to have an idea of what this code does. You can use # to comment code.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-rrstudio-2",
+    "href": "part3_viz.html#first-step-in-rrstudio-2",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nScript\n\n#-------------------------------------------------------------------------------\n# This script opens a dataset and proceeds\n# to data visualization.\n#\n# Author: Matéo Moglia\n# Date: 12/02/2025\n#-------------------------------------------------------------------------------\n\n# Set your working directory\nsetwd(\"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\")\npath &lt;- \"/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\"\n\nHere, I set the working directory using setwd(). Notice that we created our first object, named path using the assignment operator &lt;- (I personally prefer to use = which works exactly the same).\n\n\n\n\n\n\nTip\n\n\n\nWhat is the class of path? Hint: use the function class()",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-rrstudio-3",
+    "href": "part3_viz.html#first-step-in-rrstudio-3",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first data manipulation\nWe can load a very famous built-in data set, the iris dataset, into an object called data.\n\ndata = iris # Attribute to data the data set iris\nclass(data) # Check its class\n\n[1] \"data.frame\"\n\nhead(data) # Preview the first lines of data\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\nNotice that the two objects we created so far can be seen in the Environment pane.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-rrstudio-4",
+    "href": "part3_viz.html#first-step-in-rrstudio-4",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData description\nBy clicking on the object in the Environement panel, you can visualize it, but you can also write some code to describe it. As we just check, data is a data.frame object. It is made of several columns and rows.\nTo call a specific column in a dataframe, we use the $ operator. To know all the column names in data, we can use the function names(). To know the “size” of the dataframe, the right function is dim(): the first element is the number of rows and the second the number of columns.\n\n\n\n\n\n\nTip\n\n\n\nYou can also call a column by its position in the dataframe. For instance, to call the second column you can type data[,2]. For the second row: data[,2]. What should you write to print the 10th element of the 3rd column?\n\n\n\nTo describe the data, we can use several built-in functions.\n\ntable(data$Species) # To make a frequency table\n\n\n    setosa versicolor  virginica \n        50         50         50 \n\nsummary(data$Sepal.Length) # To provide summary statistics\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.300   5.100   5.800   5.843   6.400   7.900 \n\n\n\nNow, I want to visualize the data. To do so, we can use base R function plot:\n\nplot(iris$Sepal.Length,iris$Sepal.Width)",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-rrstudio-5",
+    "href": "part3_viz.html#first-step-in-rrstudio-5",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first graph!\nWe can also use a very popular library for dataviz, ggplot2. First, we install it, then we load it, and we are going to be able to use it.\n\ninstall.packages(\"ggplot2\",repos = \"http://cran.us.r-project.org\")\nlibrary(ggplot2)\n\n\n\n\n\n\n\nNote\n\n\n\nAll packages have to be downloaded and loaded this way. Note that once you’ve downloaded a package on your computer, you do not need to install it but you still need to load it through the library function.\n\n\n\n\ng1 &lt;- ggplot(data = data, mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +\n  geom_point() +\n  theme_minimal()\ng1\n\n\n\n\n\n\n\n\nThis looks better! To produce this graph we used different information:\n\nThe ggplot command takes data and mapping as input.\n\ndata should be the dataset you want to visualize, here we named it data\nmapping takes aes (for aesthetics)\n\nHere, the aesthetics are the x and y axis, and the color one, to distinguish between the species.\n\ngeom_point allows to plot… points\ntheme_minimal makes the graph tidy, with a white background, etc.\n\n\n\nNow, we can save it:\n\nggsave(filename = paste0(path,\"/output/graph_iris.png\"),plot = g1)\n\nSaving 7 x 5 in image\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe function paste0 is useful to concatenate text. Here, instead of writing the full path, we concatenate the object path (which happens to be our path) and the end of the path, including the name of the output.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-rrstudio-6",
+    "href": "part3_viz.html#first-step-in-rrstudio-6",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData: base vs. dplyr\nTo finish this -short- introduction to R, I introduce a new package, probably the most popular one in R: dplyr. As before, we install then load the library.\n\ninstall.packages(\"tidyverse\")\nlibrary(tidyverse)\n\n\nLet’s imagine we want to filter the dataset to keep only the setosa. In base R, we need to extract the lines of iris for which Species==\"setosa\". Because R is object based, we can multiple objects, here: base_setosa.\n\nThe data frame iris is close to a matrix, hence, we can extract using notations close to the matrix ones. Hence data[1,1] would give us the first line of the first column (in this order) of data. Here, we filt the lines using a condition: data$Species==\"setosa\". Do not forget the ,.\n\n\n# Base R: Filter rows where Species is \"setosa\"\nbase_setosa &lt;- data[data$Species == \"setosa\", ]\nhead(base_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nUsing dplyr and the pipe operator %&gt;%, we apply the function filter on Species.\n\n# dplyr: Filter rows where Species is \"setosa\"\ndplyr_setosa &lt;- iris %&gt;% \n  filter(Species == \"setosa\")\nhead(dplyr_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nNext, we can select specific columns.\n\n# Base R: Select only Sepal.Length and Sepal.Width columns\nbase_columns &lt;- iris[, c(\"Sepal.Length\", \"Sepal.Width\")]\nhead(base_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n# dplyr: Select only Sepal.Length and Sepal.Width columns\ndplyr_columns &lt;- iris %&gt;% \n  select(Sepal.Length, Sepal.Width)\nhead(dplyr_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n\n\n\n# Base R: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\niris$Sepal.Area &lt;- iris$Sepal.Length * iris$Sepal.Width\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n# dplyr: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\ndplyr_iris &lt;- iris %&gt;% \n  mutate(Sepal.Area = Sepal.Length * Sepal.Width)\nhead(dplyr_iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n\n\nThe advantage of dplyr is to allow for many computations:\n\ndplyr_grouped &lt;- iris %&gt;%\n  mutate(Sepal.Area = Sepal.Length * Sepal.Width) %&gt;%\n  mutate(is.Sepal.Large = ifelse(Sepal.Area &gt; median(Sepal.Area),1,0)) %&gt;% \n  group_by(Species) %&gt;%\n  summarize(mean_sepal_length = mean(Sepal.Length),\n            count_sepal_large = sum(is.Sepal.Large))\nprint(dplyr_grouped)\n\n# A tibble: 3 × 3\n  Species    mean_sepal_length count_sepal_large\n  &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;\n1 setosa                  5.01                21\n2 versicolor              5.94                18\n3 virginica               6.59                36\n\n\n\nThis dataset can be, of course represented visually:\n\nggplot(dplyr_grouped, aes(x = Species, y = count_sepal_large, fill = Species)) +\n  geom_bar(stat = \"identity\") +\n  labs(title = \"Histogram of Sepal Count by Species\",\n       x = \"Species\", y = \"Count of large sepals\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nBut we can also export it to LaTeX:\n\ninstall.packages(\"xtable\")\nlibrary(xtable)\n\n\ncolnames(dplyr_grouped) &lt;- c(\"Species\", \"Mean_Sepal_Length\", \"Count_Sepal_Large\")\nprint(xtable(dplyr_grouped), type = \"latex\", file = paste0(path,\"/output/sepal_large.tex\"))",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-latex",
+    "href": "part3_viz.html#first-step-in-latex",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nWhat is LaTeX\nLaTeX is very popular software to produce scientic writings. It is relatively easy to use. From now on, it is mandatory to produce output you would hand using LaTeX. You have three options to use LaTeX:\n\nUse any text editor and compile the file using the console\nUse an IDE, like TexStudio or TexLive\nUse an online IDE like Overleaf\n\n\nThere are plenty of tutorials over the web (or ChatGPT) to know how to use LaTeX, so I am going to be quick.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-latex-1",
+    "href": "part3_viz.html#first-step-in-latex-1",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nOverleaf\nOpen a blank project in Overleaf. It should look like that:\n\\documentclass{article}\n\n%% PREAMBULE ------------------\n\n\\usepackage{graphicx} % Required for inserting images\n\n%% METADATA -------------------\n\n\\title{Tutorial one}\n\\author{Matéo Moglia}\n\\date{February 2024}\n\n%% DOCUMENT START ------------\n\n\\begin{document}\n\n\\maketitle\n\n\\section{Introduction}\n\n\\end{document}\n\nThree elements are mandatory here: the \\documentclass{} call, the \\begin{document} and the \\end{docoment} parts. All texts should be these last two commands. The preambule is of high importance: it allows you to load packages to perform specific tasks. Here, graphicx is useful to input images. Other popular packages include:\n\ngeometry allows you to change the margins of the pages,\nbooktab to build nice-looking tables\ntikz to draw graphs directly in LaTeX\nxcolor to create and choose your favorite colors\n\nYou can then directly write any text you like after \\begin{document}.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-latex-2",
+    "href": "part3_viz.html#first-step-in-latex-2",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nMath mode\nMost interesting is the math mode. You can write in line using $ x = y$ or in an equation environment:\n\\begin{equation}\n  \\mu_k = \\int_0^{+\\infty} x^k f(x) dx = \\int_0^{+\\infty} t^{-\\frac{k}{\\alpha}} \\exp ^{-t} dt\n\\end{equation}\n\n\n\n\n\n\nTip\n\n\n\nAn environment starts with \\begin{name} and ends with \\end{name}. The environment can be an equation, to center a large chunk of text, a figure, a table, etc.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-latex-3",
+    "href": "part3_viz.html#first-step-in-latex-3",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (fig)\n\\begin{figure}\n  \\centering # To center the graph\n  \\includegraphics[width=8,height=10]{graph/graph_iris.png}\n  \\caption{Iris Sepals Length and Width}\n\\end{figure}\nWe work within the figure environment, center the graphic, include it with some options and add a caption. The graph should be uploaded in the project first! Here, I stored it in the folder graph.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-latex-4",
+    "href": "part3_viz.html#first-step-in-latex-4",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (table)\nTo input the table, we can use \\input{}:\n\\input{table/sepal_large.tex}\nNo need to specify the environment as it was directly created by the xtable function earlier on!",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#first-step-in-latex-5",
+    "href": "part3_viz.html#first-step-in-latex-5",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nCompile the file\n\nLaTeX is not a “What You See Is What You Get” software, like Word or Canvas.\n\n\nYou need to compile the code to obtain the results (usually a .pdf), that you can further download.",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#quick-exercise",
+    "href": "part3_viz.html#quick-exercise",
+    "title": "Tutorial 1",
+    "section": "Quick exercise",
+    "text": "Quick exercise\n\nOpen a new script, add the relevant information (path, date, packages) and load the swiss dataset\nCreate a grouping variable if Catholic is below median or under median\nUsing the dplyr syntax, compute the number of observations, the mean, median, and inter-quartile range of Fertility, Agriculture, and Education by group. Save as a .tex table.\nPlot the relation between Education and Infant.Mortality (ggplot2 syntax) for each group\n\nWith a scatter plot and lines that connects all points\nAdd a title and a subtitle (centered and in bold)\nPut the legend at the bottom of the slide\nExport as a .pdf\n\nExport everything in a TeX file",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html",
+    "href": "part2_desc.html",
+    "title": "Descriptive statistics",
+    "section": "",
+    "text": "In this part, we are going to learn how to:\n\nCompute summary statistics\nExport them into .tex file\nRun simple linear regressions\n\nSo far, please check that you:\n\nOpened RStudio, wrote your preambule, created a path object\nLoad the data idf_data.csv into RStudio\nLoad the package dplyr",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#roadmap",
+    "href": "part2_desc.html#roadmap",
+    "title": "Descriptive statistics",
+    "section": "",
+    "text": "In this part, we are going to learn how to:\n\nCompute summary statistics\nExport them into .tex file\nRun simple linear regressions\n\nSo far, please check that you:\n\nOpened RStudio, wrote your preambule, created a path object\nLoad the data idf_data.csv into RStudio\nLoad the package dplyr",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#what-is-r-set-up-and-launch",
+    "href": "part2_desc.html#what-is-r-set-up-and-launch",
+    "title": "Tutorial 1",
+    "section": "What is R? Set-up and launch",
+    "text": "What is R? Set-up and launch\nR is a free and open-source software used in many contexts: data cleaning, data visualisation, econometrics, machine and deep learning, among others.\nIt is supported by a lively and active user community. R is an object-based language, meaning that we are going to manipulate objects through a series of commands.\n\nR can be used directly from a command terminal, but we prefer to use RStudio, an IDE, to make our lifes easier. An IDE is an interface that eases the use of a software. The most popular one is RStudio. To use it, we need to:\n\nDownload R\nThen, download RStudio\n\n\nYou can download both from here https://posit.co/download/rstudio-desktop/.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#general-best-practices",
+    "href": "part2_desc.html#general-best-practices",
+    "title": "Tutorial 1",
+    "section": "General best practices",
+    "text": "General best practices\nBefore jumping to coding per se, let me recall you some best practices when performing computer-based tasks.\n\n\nFolder organization\nComputers are organized around folder. We are going to work in a working directory (wd), but we need to identify it. My folder tree looks like it:\n/Users/mmoglia/Dropbox/\n├── Documents/\n│   ├── perso/\n│   │   ├── banque/\n│   │   ├── admin/\n│   │   └── festival/\n├── Downloads/\n├── Music/\n├── Pictures/\n│   ├── famille/\n│   ├── vacances/\n└── courses/\n│   ├── polytechnique/\n|   |   ├── 2024_eco102/\n|   |   ├── 2025_eco1s002/\n├── research/\nHere we are going to work in ~/courses/2025_eco1s002/. This folder may (and should!) contains subfolders, for instance: /code, /output, /raw_data, etc.\n\n\n\nNaming convention\nA typical tip is to choose simple and short titles for the files and the scripts. For instance, this file is named tutorial1.qmd. Your code can be named code_tutorial1.R. It should be self-explanatory.\n\n\n\n\n\n\nTip\n\n\n\nAvoid at all cost to use spaces or special characters in your file names. Prefer instead an underscore or a score.\n\n\n\n\n\nWhen writing code\n\nAlways comment your code, make it readable for your future self but also for others. You may use your code in a week, a month, a year, and should be able to directly understands it!\nWhen creating objects, functions, or whatever, give it simple but understandable names.\nFor instance, if you create a data frame containing wages for individuals aged between 25 and 30, you way call it wage_25_30 and not w2530 (too short) or wage_individuals_aged_25_30 (too long).\nMoreover, especially for large project, you want to have different scripts. Always keep scripts short and with clear names. For instance 1_clean_data.R, 2_import_wages.R, 3_merge_datasets.R, and 4_data_analysis.R.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-rrstudio",
+    "href": "part2_desc.html#first-step-in-rrstudio",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nSome useful terms\n\nSo far, we talked about script.\nWe are going to manipulate object using functions.\nObjects can be of different classes: matrix, vector, character, numeric, data.frame, etc. Some functions are already in R but some are not. Hence, we need to load them thanks to packages.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-rrstudio-1",
+    "href": "part2_desc.html#first-step-in-rrstudio-1",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOpen a script\n\nWe are going to create our first script (the extension is .R).\nThis script contains all commands you want to run. R has built-in functions but most useful functions should be called using library().\nThese libraries should be first downloaded then loaded into your project.\nFirst, open RStudio and opens a new script.\nYou should have an empty page. You may want to write some words at the top of it to have an idea of what this code does. You can use # to comment code.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-rrstudio-2",
+    "href": "part2_desc.html#first-step-in-rrstudio-2",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nScript\n\n#-------------------------------------------------------------------------------\n# This script opens a dataset and proceeds\n# to data visualization.\n#\n# Author: Matéo Moglia\n# Date: 12/02/2025\n#-------------------------------------------------------------------------------\n\n# Set your working directory\nsetwd(\"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\")\npath &lt;- \"/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002/site\"\n\nHere, I set the working directory using setwd(). Notice that we created our first object, named path using the assignment operator &lt;- (I personally prefer to use = which works exactly the same).\n\n\n\n\n\n\nTip\n\n\n\nWhat is the class of path? Hint: use the function class()",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-rrstudio-3",
+    "href": "part2_desc.html#first-step-in-rrstudio-3",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first data manipulation\nWe can load a very famous built-in data set, the iris dataset, into an object called data.\n\ndata = iris # Attribute to data the data set iris\nclass(data) # Check its class\n\n[1] \"data.frame\"\n\nhead(data) # Preview the first lines of data\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\nNotice that the two objects we created so far can be seen in the Environment pane.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-rrstudio-4",
+    "href": "part2_desc.html#first-step-in-rrstudio-4",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData description\nBy clicking on the object in the Environement panel, you can visualize it, but you can also write some code to describe it. As we just check, data is a data.frame object. It is made of several columns and rows.\nTo call a specific column in a dataframe, we use the $ operator. To know all the column names in data, we can use the function names(). To know the “size” of the dataframe, the right function is dim(): the first element is the number of rows and the second the number of columns.\n\n\n\n\n\n\nTip\n\n\n\nYou can also call a column by its position in the dataframe. For instance, to call the second column you can type data[,2]. For the second row: data[,2]. What should you write to print the 10th element of the 3rd column?\n\n\n\nTo describe the data, we can use several built-in functions.\n\ntable(data$Species) # To make a frequency table\n\n\n    setosa versicolor  virginica \n        50         50         50 \n\nsummary(data$Sepal.Length) # To provide summary statistics\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.300   5.100   5.800   5.843   6.400   7.900 \n\n\n\nNow, I want to visualize the data. To do so, we can use base R function plot:\n\nplot(iris$Sepal.Length,iris$Sepal.Width)",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-rrstudio-5",
+    "href": "part2_desc.html#first-step-in-rrstudio-5",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nOur first graph!\nWe can also use a very popular library for dataviz, ggplot2. First, we install it, then we load it, and we are going to be able to use it.\n\ninstall.packages(\"ggplot2\",repos = \"http://cran.us.r-project.org\")\nlibrary(ggplot2)\n\n\n\n\n\n\n\nNote\n\n\n\nAll packages have to be downloaded and loaded this way. Note that once you’ve downloaded a package on your computer, you do not need to install it but you still need to load it through the library function.\n\n\n\n\ng1 &lt;- ggplot(data = data, mapping = aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +\n  geom_point() +\n  theme_minimal()\ng1\n\n\n\n\n\n\n\n\nThis looks better! To produce this graph we used different information:\n\nThe ggplot command takes data and mapping as input.\n\ndata should be the dataset you want to visualize, here we named it data\nmapping takes aes (for aesthetics)\n\nHere, the aesthetics are the x and y axis, and the color one, to distinguish between the species.\n\ngeom_point allows to plot… points\ntheme_minimal makes the graph tidy, with a white background, etc.\n\n\n\nNow, we can save it:\n\nggsave(filename = paste0(path,\"/output/graph_iris.png\"),plot = g1)\n\nSaving 7 x 5 in image\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe function paste0 is useful to concatenate text. Here, instead of writing the full path, we concatenate the object path (which happens to be our path) and the end of the path, including the name of the output.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-rrstudio-6",
+    "href": "part2_desc.html#first-step-in-rrstudio-6",
+    "title": "Tutorial 1",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nData: base vs. dplyr\nTo finish this -short- introduction to R, I introduce a new package, probably the most popular one in R: dplyr. As before, we install then load the library.\n\ninstall.packages(\"tidyverse\")\nlibrary(tidyverse)\n\n\nLet’s imagine we want to filter the dataset to keep only the setosa. In base R, we need to extract the lines of iris for which Species==\"setosa\". Because R is object based, we can multiple objects, here: base_setosa.\n\nThe data frame iris is close to a matrix, hence, we can extract using notations close to the matrix ones. Hence data[1,1] would give us the first line of the first column (in this order) of data. Here, we filt the lines using a condition: data$Species==\"setosa\". Do not forget the ,.\n\n\n# Base R: Filter rows where Species is \"setosa\"\nbase_setosa &lt;- data[data$Species == \"setosa\", ]\nhead(base_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nUsing dplyr and the pipe operator %&gt;%, we apply the function filter on Species.\n\n# dplyr: Filter rows where Species is \"setosa\"\ndplyr_setosa &lt;- iris %&gt;% \n  filter(Species == \"setosa\")\nhead(dplyr_setosa)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\nNext, we can select specific columns.\n\n# Base R: Select only Sepal.Length and Sepal.Width columns\nbase_columns &lt;- iris[, c(\"Sepal.Length\", \"Sepal.Width\")]\nhead(base_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n# dplyr: Select only Sepal.Length and Sepal.Width columns\ndplyr_columns &lt;- iris %&gt;% \n  select(Sepal.Length, Sepal.Width)\nhead(dplyr_columns)\n\n  Sepal.Length Sepal.Width\n1          5.1         3.5\n2          4.9         3.0\n3          4.7         3.2\n4          4.6         3.1\n5          5.0         3.6\n6          5.4         3.9\n\n\n\n\n# Base R: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\niris$Sepal.Area &lt;- iris$Sepal.Length * iris$Sepal.Width\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n# dplyr: Create a new column with Sepal.Area (Sepal.Length * Sepal.Width)\ndplyr_iris &lt;- iris %&gt;% \n  mutate(Sepal.Area = Sepal.Length * Sepal.Width)\nhead(dplyr_iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area\n1          5.1         3.5          1.4         0.2  setosa      17.85\n2          4.9         3.0          1.4         0.2  setosa      14.70\n3          4.7         3.2          1.3         0.2  setosa      15.04\n4          4.6         3.1          1.5         0.2  setosa      14.26\n5          5.0         3.6          1.4         0.2  setosa      18.00\n6          5.4         3.9          1.7         0.4  setosa      21.06\n\n\n\nThe advantage of dplyr is to allow for many computations:\n\ndplyr_grouped &lt;- iris %&gt;%\n  mutate(Sepal.Area = Sepal.Length * Sepal.Width) %&gt;%\n  mutate(is.Sepal.Large = ifelse(Sepal.Area &gt; median(Sepal.Area),1,0)) %&gt;% \n  group_by(Species) %&gt;%\n  summarize(mean_sepal_length = mean(Sepal.Length),\n            count_sepal_large = sum(is.Sepal.Large))\nprint(dplyr_grouped)\n\n# A tibble: 3 × 3\n  Species    mean_sepal_length count_sepal_large\n  &lt;fct&gt;                  &lt;dbl&gt;             &lt;dbl&gt;\n1 setosa                  5.01                21\n2 versicolor              5.94                18\n3 virginica               6.59                36\n\n\n\nThis dataset can be, of course represented visually:\n\nggplot(dplyr_grouped, aes(x = Species, y = count_sepal_large, fill = Species)) +\n  geom_bar(stat = \"identity\") +\n  labs(title = \"Histogram of Sepal Count by Species\",\n       x = \"Species\", y = \"Count of large sepals\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nBut we can also export it to LaTeX:\n\ninstall.packages(\"xtable\")\nlibrary(xtable)\n\n\ncolnames(dplyr_grouped) &lt;- c(\"Species\", \"Mean_Sepal_Length\", \"Count_Sepal_Large\")\nprint(xtable(dplyr_grouped), type = \"latex\", file = paste0(path,\"/output/sepal_large.tex\"))",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-latex",
+    "href": "part2_desc.html#first-step-in-latex",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nWhat is LaTeX\nLaTeX is very popular software to produce scientic writings. It is relatively easy to use. From now on, it is mandatory to produce output you would hand using LaTeX. You have three options to use LaTeX:\n\nUse any text editor and compile the file using the console\nUse an IDE, like TexStudio or TexLive\nUse an online IDE like Overleaf\n\n\nThere are plenty of tutorials over the web (or ChatGPT) to know how to use LaTeX, so I am going to be quick.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-latex-1",
+    "href": "part2_desc.html#first-step-in-latex-1",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nOverleaf\nOpen a blank project in Overleaf. It should look like that:\n\\documentclass{article}\n\n%% PREAMBULE ------------------\n\n\\usepackage{graphicx} % Required for inserting images\n\n%% METADATA -------------------\n\n\\title{Tutorial one}\n\\author{Matéo Moglia}\n\\date{February 2024}\n\n%% DOCUMENT START ------------\n\n\\begin{document}\n\n\\maketitle\n\n\\section{Introduction}\n\n\\end{document}\n\nThree elements are mandatory here: the \\documentclass{} call, the \\begin{document} and the \\end{docoment} parts. All texts should be these last two commands. The preambule is of high importance: it allows you to load packages to perform specific tasks. Here, graphicx is useful to input images. Other popular packages include:\n\ngeometry allows you to change the margins of the pages,\nbooktab to build nice-looking tables\ntikz to draw graphs directly in LaTeX\nxcolor to create and choose your favorite colors\n\nYou can then directly write any text you like after \\begin{document}.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-latex-2",
+    "href": "part2_desc.html#first-step-in-latex-2",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nMath mode\nMost interesting is the math mode. You can write in line using $ x = y$ or in an equation environment:\n\\begin{equation}\n  \\mu_k = \\int_0^{+\\infty} x^k f(x) dx = \\int_0^{+\\infty} t^{-\\frac{k}{\\alpha}} \\exp ^{-t} dt\n\\end{equation}\n\n\n\n\n\n\nTip\n\n\n\nAn environment starts with \\begin{name} and ends with \\end{name}. The environment can be an equation, to center a large chunk of text, a figure, a table, etc.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-latex-3",
+    "href": "part2_desc.html#first-step-in-latex-3",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (fig)\n\\begin{figure}\n  \\centering # To center the graph\n  \\includegraphics[width=8,height=10]{graph/graph_iris.png}\n  \\caption{Iris Sepals Length and Width}\n\\end{figure}\nWe work within the figure environment, center the graphic, include it with some options and add a caption. The graph should be uploaded in the project first! Here, I stored it in the folder graph.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-latex-4",
+    "href": "part2_desc.html#first-step-in-latex-4",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nInclude our results (table)\nTo input the table, we can use \\input{}:\n\\input{table/sepal_large.tex}\nNo need to specify the environment as it was directly created by the xtable function earlier on!",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#first-step-in-latex-5",
+    "href": "part2_desc.html#first-step-in-latex-5",
+    "title": "Tutorial 1",
+    "section": "First step in LaTeX",
+    "text": "First step in LaTeX\n\nCompile the file\n\nLaTeX is not a “What You See Is What You Get” software, like Word or Canvas.\n\n\nYou need to compile the code to obtain the results (usually a .pdf), that you can further download.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#quick-exercise",
+    "href": "part2_desc.html#quick-exercise",
+    "title": "Tutorial 1",
+    "section": "Quick exercise",
+    "text": "Quick exercise\n\nOpen a new script, add the relevant information (path, date, packages) and load the swiss dataset\nCreate a grouping variable if Catholic is below median or under median\nUsing the dplyr syntax, compute the number of observations, the mean, median, and inter-quartile range of Fertility, Agriculture, and Education by group. Save as a .tex table.\nPlot the relation between Education and Infant.Mortality (ggplot2 syntax) for each group\n\nWith a scatter plot and lines that connects all points\nAdd a title and a subtitle (centered and in bold)\nPut the legend at the bottom of the slide\nExport as a .pdf\n\nExport everything in a TeX file",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part0_r.html#the-tidyverse",
+    "href": "part0_r.html#the-tidyverse",
+    "title": "First hands on R",
+    "section": "The tidyverse",
+    "text": "The tidyverse\n\nWhy and how use it?\nThere are several ways to code in R. The first one, as we just saw, is called “base R”. Although useful to perform very simple task, it becomes inefficient for more difficult tasks. The most popular approach in the R community is by far the tidyverse approach. The idea is simple: we are going to apply a series of functions on an object to modify it or create a new object.\nIts popularity arises from two important factors: it is simple and straightforward to understand and it is faster than base R. A third approach is data.table. It is the fastest approach but requires a high entry cost and is not straightforward.\nTo use it, we can download the package dplyr and load it into our session. You need to download the package once (as long as you keep the same computer) but to load it each time you open RStudio. This is true for all packages. Note that all the function from the base package are natively loaded into R.\n\ninstall.packages(\"dplyr\") # Notice the quotation marks\nlibrary(dplyr) # Notice the absence of quotation marks\n\n\n\n\n\n\n\nTip\n\n\n\nMost of time, a function exists only in one package. However, it occurs that two packages load functions with the same name. To make sure you use the function from the desired package, you can use the package::function() syntax. In my research, I usually have to deal with that with the function select() that is loaded in dplyr and in sf (a package for spatial data manipulation). Hence, if both packages are loaded and I want to use the one from dplyr, I have to write dplyr::select().\n\n\n\n\nGeneral philosophy\nEach function are going to be separated by a pipe operator %&gt;%. The idea is as following. We apply on the object data several functions in order to create a new data object, new_data. These functions, for instance, create a new column, slice the data, drop the duplicates, remove the missing values, group the data by group, change the type of column (for numeric to character), compute summary statistics, etc.\n\nnew_data = data %&gt;%\n    function1(col) %&gt;%\n    function2(col) %&gt;%\n    function3(col)\n\nBelow, I list the most common dplyr functions.\n\n\n\nFunction\nDescription\n\n\n\n\nfilter()\nSelect rows that meet certain conditions\n\n\nselect()\nPick specific columns from a data frame\n\n\narrange()\nReorder rows by column values\n\n\nmutate()\nCreate or modify columns\n\n\nsummarise()\nCollapse data into summary statistics\n\n\ngroup_by()\nDefine groups for grouped operations\n\n\njoin()\nCombine datasets by matching keys\n\n\ndistinct()\nKeep only unique rows\n\n\nrename()\nChange column names\n\n\nslice()\nSelect rows by position\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nUsing the data dataframe, create a sub-dataset new_data such that:\n\nIt contains only the species setosa\nThe column Sepal.Length is now named sepal_length\nIt contains a new column large_width which takes 1 if the sepal width is bigger than 3 (hint: use an ifelse(cond,yes,false) function)\n\n\n\nNow, we want to simply print the number of observations for each value of large_width. To do so:\n\nnew_data %&gt;%\n    group_by(large_width) %&gt;% \n    summarize(count = n())\n\n# A tibble: 2 × 2\n  large_width count\n        &lt;dbl&gt; &lt;int&gt;\n1           0     2\n2           1    48\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou can try with other summarizing function. For instance: summarize(mean = mean(Sepal.Width))."
+  },
+  {
+    "objectID": "docs/part0_R.html",
+    "href": "docs/part0_R.html",
+    "title": "First hands on R",
+    "section": "",
+    "text": "For this first part, we are going to\n\nDownload R and Rstudio\nDiscover the software\nDig into the tidyverse environment"
+  },
+  {
+    "objectID": "docs/part0_R.html#roadmap",
+    "href": "docs/part0_R.html#roadmap",
+    "title": "First hands on R",
+    "section": "",
+    "text": "For this first part, we are going to\n\nDownload R and Rstudio\nDiscover the software\nDig into the tidyverse environment"
+  },
+  {
+    "objectID": "docs/part0_R.html#what-is-r-set-up-and-launch",
+    "href": "docs/part0_R.html#what-is-r-set-up-and-launch",
+    "title": "First hands on R",
+    "section": "What is R? Set-up and launch",
+    "text": "What is R? Set-up and launch\nR is a free and open-source software used in many contexts: data cleaning, data visualisation, econometrics, machine and deep learning, among others. It is supported by a lively and active user community. R is an object-based language, meaning that we are going to manipulate objects through a series of commands.\nR can be used directly from a command terminal, but we prefer to use RStudio, an IDE, to make our lifes easier. An IDE is an interface that eases the use of a software. The most popular one is RStudio. To use it, we need to:\n\nDownload R\nThen, download RStudio\n\n\nYou can download both from here https://posit.co/download/rstudio-desktop/."
+  },
+  {
+    "objectID": "docs/part0_R.html#general-best-practices",
+    "href": "docs/part0_R.html#general-best-practices",
+    "title": "First hands on R",
+    "section": "General best practices",
+    "text": "General best practices\nBefore jumping to coding per se, let me recall you some best practices when performing computer-based tasks.\n\nFolder organization\nComputers are organized around folder. We are going to work in a working directory (wd), but we need to identify it. My folder tree looks like it:\n/Users/mmoglia/Dropbox/\n├── Documents/\n│   ├── perso/\n│   │   ├── banque/\n│   │   ├── admin/\n│   │   └── festival/\n├── Downloads/\n├── Music/\n├── Pictures/\n│   ├── famille/\n│   ├── vacances/\n└── courses/\n│   ├── polytechnique/\n|   |   ├── 2024_eco102/\n|   |   ├── 2025_eco1s002/\n|   |   ├── 2026_eco51423ep/\n├── research/\nHere we are going to work in ~/courses/2026_eco51423ep/. This folder may (and should!) contains subfolders, for instance: /code, /output, /raw_data, etc.\n\n\nNaming convention\nA typical tip is to choose simple and short titles for the files and the scripts. For instance, this file is named part0_r.qmd. Your code can be named code_tutorial.R. It should be self-explanatory.\n\n\n\n\n\n\nTip\n\n\n\nAvoid at all cost to use spaces or special characters in your file names. Prefer instead an underscore.\n\n\n\n\nWhen writing code\n\nAlways comment your code, make it readable for your future self but also for others. You may use your code in a week, a month, a year, and should be able to directly understands it! Comments in R starts with #.\nWhen creating objects, functions, or whatever, give it simple but understandable names.\nFor instance, if you create a data frame containing wages for individuals aged between 25 and 30, you way call it wage_25_30 and not w2530 (too short) or wage_individuals_aged_25_30 (too long).\nMoreover, especially for large project, you want to have different scripts. Always keep scripts short and with clear names. For instance 1_clean_data.R, 2_import_wages.R, 3_merge_datasets.R, and 4_data_analysis.R."
+  },
+  {
+    "objectID": "docs/part0_R.html#first-step-in-rrstudio",
+    "href": "docs/part0_R.html#first-step-in-rrstudio",
+    "title": "First hands on R",
+    "section": "First step in R/Rstudio",
+    "text": "First step in R/Rstudio\n\nSome useful terms\n\nSo far, we talked about script.\nWe are going to manipulate objects using functions.\nObjects can be of different classes: matrix, vector, character, numeric, data.frame, etc. Some functions are already in R but some are not. Hence, we need to load them thanks to packages.\n\n\n\nOpen a script\n\nWe are going to create our first script (the extension is .R).\nThis script contains all commands you want to run. R has built-in functions but most useful functions should be called using library().\nThese libraries should be first downloaded then loaded into your project.\nFirst, open RStudio and opens a new script.\nYou should have an empty page. You may want to write some words at the top of it to have an idea of what this code does. You can use # to comment code.\n\n\n\nSeek for help and documentation\nTo know more about a function, simply type ?function in the console. Of course, internet is your friend, and ChatGPT (or any other LLMs) are pretty good at R. As I learnt how to use R in the LLM-era, I, of course, prefer to use Stack or other online forums instead!\n\n\nScript\n\n#-------------------------------------------------------------------------------\n# This script opens a dataset and proceeds\n# to data visualization.\n#\n# Author: Matéo Moglia\n# Date: 12/02/2025\n#-------------------------------------------------------------------------------\n\n# Set your working directory\nsetwd(\"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep\")\npath &lt;- \"/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep\"\n\nHere, I set the working directory using setwd(). Notice that we created our first object, named path using the assignment operator &lt;- (I personally prefer to use = which works exactly the same). This object will turn out to be useful later on.\n\n\n\n\n\n\nTip\n\n\n\nWhat is the class of path? Hint: use the function class()\n\n\n\n\nOur first data manipulation\nWe can load a very famous built-in data set, the iris dataset, into an object called data.\n\ndata = iris # Attribute to data the data set iris\nclass(data) # Check its class\n\n[1] \"data.frame\"\n\nhead(data) # Preview the first lines of data\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\nNotice that the two objects we created so far can be seen in the Environment pane.\n\n\nData description\nBy clicking on the object in the Environement panel, you can visualize it, but you can also write some code to describe it. As we just check, data is a data.frame object. It is made of several columns and rows.\nTo call a specific column in a dataframe, we use the $ operator. To know all the column names in data, we can use the function names(). To know the “size” of the dataframe, the right function is dim(): the first element is the number of rows and the second the number of columns.\n\n\n\n\n\n\nTip\n\n\n\nYou can also call a column by its position in the dataframe. For instance, to call the second column you can type data[,2]. For the second row: data[,2]. What should you write to print the 10th element of the 3rd column?\n\n\nTo describe the data, we can use several built-in functions.\n\ntable(data$Species) # To make a frequency table\n\n\n    setosa versicolor  virginica \n        50         50         50 \n\nsummary(data$Sepal.Length) # To provide summary statistics\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  4.300   5.100   5.800   5.843   6.400   7.900 \n\n\nNow, we want to visualize the data. To do so, we can use base R function plot(). It takes at least one argument, on the x axis. Here, with two arguments, it plots a simple scatter plot.\n\nplot(iris$Sepal.Length,iris$Sepal.Width)"
+  },
+  {
+    "objectID": "docs/part0_R.html#the-tidyverse",
+    "href": "docs/part0_R.html#the-tidyverse",
+    "title": "First hands on R",
+    "section": "The tidyverse",
+    "text": "The tidyverse\n\nWhy and how use it?\nThere are several ways to code in R. The first one, as we just saw, is called “base R”. Although useful to perform very simple task, it becomes inefficient for more difficult tasks. The most popular approach in the R community is by far the tidyverse approach. The idea is simple: we are going to apply a series of functions on an object to modify it or create a new object.\nIts popularity arises from two important factors: it is simple and straightforward to understand and it is faster than base R. A third approach is data.table. It is the fastest approach but requires a high entry cost and is not straightforward.\nTo use it, we can download the package dplyr and load it into our session. You need to download the package once (as long as you keep the same computer) but to load it each time you open RStudio. This is true for all packages. Note that all the function from the base package are natively loaded into R.\n\ninstall.packages(\"dplyr\") # Notice the quotation marks\nlibrary(dplyr) # Notice the absence of quotation marks\n\n\n\nGeneral philosophy\nEach function are going to be separated by a pipe operator %&gt;%. The idea is as following. We apply on the object data several functions in order to create a new data object, new_data. These functions, for instance, create a new column, slice the data, drop the duplicates, remove the missing values, group the data by group, change the type of column (for numeric to character), compute summary statistics, etc.\n\nnew_data = data %&gt;%\n    function1(col) %&gt;%\n    function2(col) %&gt;%\n    function3(col)\n\nBelow, I list the most common dplyr functions.\n\n\n\nFunction\nDescription\n\n\n\n\nfilter()\nSelect rows that meet certain conditions\n\n\nselect()\nPick specific columns from a data frame\n\n\narrange()\nReorder rows by column values\n\n\nmutate()\nCreate or modify columns\n\n\nsummarise()\nCollapse data into summary statistics\n\n\ngroup_by()\nDefine groups for grouped operations\n\n\njoin()\nCombine datasets by matching keys\n\n\ndistinct()\nKeep only unique rows\n\n\nrename()\nChange column names\n\n\nslice()\nSelect rows by position\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nUsing the data dataframe, create a sub-dataset new_data such that:\n\nIt contains only the species setosa\nThe column Sepal.Length is now named sepal_length\nIt contains a new column large_width which takes 1 if the sepal width is bigger than 3 (hint: use an ifelse(cond,yes,false) function)\n\n\n\nNow, we want to simply print the number of observations for each value of large_width. To do so:\n\nnew_data %&gt;%\n    group_by(large_width) %&gt;% \n    summarize(count = n())\n\n# A tibble: 2 × 2\n  large_width count\n        &lt;dbl&gt; &lt;int&gt;\n1           0     2\n2           1    48\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou can try with other summarizing function. For instance: summarize(mean = mean(Sepal.Width))."
+  },
+  {
+    "objectID": "part1_data.html#open-datasets",
+    "href": "part1_data.html#open-datasets",
+    "title": "Open data",
+    "section": "Open datasets",
+    "text": "Open datasets\n\nData format\nAs you may know, data come in various formats. Here are some common formats:\n\n\n\nExtension\nFormat\nDescription\nEfficiency ⭐\n\n\n\n\n.csv\nCSV\nComma-separated values\n⭐⭐\n\n\n.tsv\nTSV\nTab-separated values\n⭐⭐\n\n\n.xlsx\nXLSX\nExcel spreadsheet\n⭐\n\n\n.RData\nRData\nR’s format\n⭐⭐⭐\n\n\n.json\nJSON\nJavaScript\n⭐⭐\n\n\n.parquet\nPARQUET\nColumnar storage\n⭐⭐⭐⭐⭐\n\n\n.sql\nSQL\nStructured database storage\n⭐⭐⭐⭐\n\n\n\nMany other formats exist, depending on the source or the type of data stored (eg, spatial data).\n\n\nOpen data in R\nWe are going to manipulate mostly .csv database. There are non-proprietary and can be opened by virtually all softwares. This is not the most efficient way to store data. If you manipulate very large database (tens of millions of observations with hundreds of columns), I advise you to use .parquet.\nBase R includes a function to open .csv files with the function read.csv2(). Some packages might be required to open other formats. To open large .csv dataset, I advise you to use the fread() function from the package data.table.\nThe syntax is:\n\ndata = read.csv2(path = \"C:/your/path/data_to_open.csv\")\n\n\n\nWrite data\nOnce you are done cleaning the data, you might want to save your dataset (this is actually good practice!). Most functions to read data, have a writing function counterpart. Hence:\n\nwrite.csv2(data, path = \"C:/your/path/name_of_the_dataset.csv\")\n\n\n\nUse a paste()\nYou might want to save a bit of time, reduce the probability of writing errors, and increase the reliability and reproducibility of your code by using a path object within a paste() function. This function, from base R, simply concatenates two strings. For instance paste(\"Hello\",\"world\",sep = \" \") will produce \"Hello world\". An alternative function is paste0() which, by default, concatenates without space. Hence, paste(\"Hello\",\"world\",sep = \"\") and paste0(\"Hello\",\"world\") would be stricly equivalent and prints Helloword.\nIt comes handy with the read.csv2() and the write.csv2() functions. Instead of rewriting the total length each time, you can call the path object you created earlier on. If the dataset idf_data.csv is stored in the subfolder /data, it is easy to open it:\n\npath = \"/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep\"\n\ndata = read.csv2(path = paste0(path,\"/data/idf_data.csv\"))\n\nIt is useful if you share code with someone. You need to change only the line with the path, instead of the whole code.\n\n\nDiscover the data\nI prepared a dataset, mainly drawn from INSEE data, and downloaded from the Institut Paris Region, a research organization on urbanism in the Ile-de-France region. It contains various socio-economic variables at the municipality (and Paris’ arrondissement) level. It contains information on demographic characteristics, income, and on housing market variables.\nThe codebook contains all variables and a quick description.",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#data-cleaning",
+    "href": "part1_data.html#data-cleaning",
+    "title": "Open data",
+    "section": "Data cleaning",
+    "text": "Data cleaning\nData cleaning refers to going from a raw dataset to a dataset than can be used and manipulated efortlessly. Below, here are some examples of data cleaning procedures:\n\nFormat column names (eg, replace spaces with underscores with function rename());\nRemove missing values if they are real missing values with mutate() and ifelse();\nReplace weird values by NAs or 0s (eg, most INSEE missing wage values are 99999 and should be refered as NAs, and not as 99999) with mutate() and ifelse();\nClean/create ID variables (for instance, municipal ID in France is made of the département code in 2-digit and the municipality in 3-digit. To create a municipal ID, one needs to concatenate both) with mutate() and paste0();\nPut variables in the right format (eg, numeric variables such as wage should be… numeric and not string – super frequent with .csv datasets that do not store the column format) with mutate() and as.numeric() or as.character();\nOverall visual inspection (check if no weird values, use the summary() or head() functions)\n\nAlthough time consuming, this step is particularly important to (i) familiarize with the data and (ii) save precious time when it comes to the data analysis.\nUsually, data come from a codebook, a dictionnary, or some kind of documentation (another dataset or a .pdf). It is super useful to read them carefully to understand how data are reported (missing values, column names, variable formatting) .\nFor the purpose of the class, data are already cleaned but never take data as face value!",
+    "crumbs": [
+      "Open data"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#descriptive-statistics",
+    "href": "part2_desc.html#descriptive-statistics",
+    "title": "Descriptive statistics",
+    "section": "Descriptive statistics",
+    "text": "Descriptive statistics\n\nDefinition\nDescriptive statistics summarize and organize data to make it easier to understand, often using measures such as mean, median, variance, standard deviation, but also the number of observations.\n\n\nImplementation\nIn R, descriptive statistics can be implemented using built-in functions such as mean(), median(), sd(), and summary(), or through the dplyr package for more flexible and readable workflows. The key function is summarize() (or summarise(), R is relatively flexible between UK and US English).\nIf you want to summarize by group, make sure to group your data first using group_by().\n\n\nDepartmental population\nThe first question we want to answer is fairly simple: what is the population in each département?\n\n\n\n\n\n\nExercise\n\n\n\nFrom the idf_data data, create a new data frame with the population at the département level.\n\nCreate a variable with the dep ID (hint: use substr() to extract the first two digits of the municipal ID.\nGroup by département and compute the sum of population\n\n\n\n\n\nHousing price by city size\nNow, we want to test if city size correlates with price. A visual approach would be interesting (and we are actually going to do it later on), but so far, we stick with the numeric approach.\nHow can we proceed?\n\n\n\n\n\n\nExercise\n\n\n\nFrom the idf_data data, create a new data frame which provides the first/second/third quartile as well as the mean of housing cost by group of city sizes. You decide on the definition of the groups.",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#latex-export",
+    "href": "part2_desc.html#latex-export",
+    "title": "Descriptive statistics",
+    "section": "LaTeX export",
+    "text": "LaTeX export",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part2_desc.html#linear-regression",
+    "href": "part2_desc.html#linear-regression",
+    "title": "Descriptive statistics",
+    "section": "Linear regression",
+    "text": "Linear regression\nThe point of this class is not to teach you much about linear regression. The baseline model is:\n\\[\ny_i = \\alpha + \\beta x_i + e_i\n\\]\nThe obtained coefficient in this model gives the correlation between \\(x_i\\) and \\(y_i\\). Under specific conditions (notably, see the Gauss-Markov theorem), it is possible to draw causal conclusions on the impact of \\(x\\) on \\(y\\), but this is beyond the scope of this class.\nThe base function for linear regression is lm(y ~ x, data). However, I highlight a much more powerful and flexible package, either to regress but also to export results, fixest, which works with the same syntax and allows to implement so many more linear models and extensions.\n\n\n\n\n\n\nExercise\n\n\n\n\nWhat is the correlation coefficient between population and housing cost?\nCreate two new columns: log population and log housing cost\nRerun the model with the logged variables. Do the results make sense?\n\n\n\nTo export, we rely on…",
+    "crumbs": [
+      "Descriptive statistics"
+    ]
+  },
+  {
+    "objectID": "part3_viz.html#plots-with-ggplot2",
+    "href": "part3_viz.html#plots-with-ggplot2",
+    "title": "Data visualisation",
+    "section": "Plots with ggplot2",
+    "text": "Plots with ggplot2\n\nGeneral description\nThis package is a workhorse of data visualization in R. The structure is somewhat similar to the dplyr approach. The idea is to apply to a ggplot() object a series of functions to add elements to the plot and control the appearance of the latter. The syntax requires:\n\nData, from which the graph will be made\nMapping, a set of instructions to “structure” the appearance of the graphs. Usually, it sets the axes, the grouping variables, among other things. It is also referred as aesthetics\nLayers, which converts the data and the mapping into geometries (points, lines, regression lines, bar charts, etc.)\n[opt.] Scales, to control the appearance of the mapping (axes length, colors, etc.)\n[opt.] Guides/Themes, to control the general appearance of the graph\n\nUsually, the ggplot function takes two main arguments and one to many sub-arguments. The two main arguments are (i) the data on which the visualization is required and (ii) an aesthetic. The aesthetic controls the key element of the visualization, such as the x and y axes or the grouping colors/linetypes.\nLet’s imagine we have a dataset df with x_val and y_val values and a grouping variable (gender, country, etc.). Hence, to plot a scatter plot, we would code:\n\nggplot(df, mapping = aes(x = x_val, y = y_val, colour = gender)) + # Set the graph\n    geom_point() + # Add points\n    theme_void() # Control the general appearance of the graph\n\n\n\nMore details",
+    "crumbs": [
+      "Data visualization"
+    ]
+  },
+  {
+    "objectID": "part1_data.html#data-manipulation",
+    "href": "part1_data.html#data-manipulation",
+    "title": "Open data",
+    "section": "Data manipulation",
+    "text": "Data manipulation\n\nMerge datasets\nIn real world situation, data come from many sources and/or are delivered in many datasets (one per year, or per area, for instance). Then, you want to merge them to obtain a bigger and more insightful datasets.\n\n\n\n\n\n\nNote\n\n\n\nBecause R is an objet-based language, you can manipulate several datasets within the same function. However, this is perilous as you have to make sure that they have the same dimensions, are formated the same, etc. Merging reduces the probability to face those issues\n\n\nIn dplyr, the merging is done through the joint functions. A join between a df1 and a df2 has to be done on at least one joining variable. There are several types of joints:\n\n\n\n\n\n\n\nJoin Type\nDescription\n\n\n\n\ninner_join()\nReturns rows with matching keys in both tables\n\n\nleft_join()\nReturns all rows from the left table, with matches from the right if present\n\n\nright_join()\nReturns all rows from the right table, with matches from the left if present\n\n\nfull_join()\nReturns all rows from both tables, matching where possible\n\n\nsemi_join()\nReturns rows from the left table that have a match in the right table\n\n\nanti_join()\nReturns rows from the left table that do not have a match in the right table\n\n\n\nHence, the code should look like that:\n\nmerged_df = left_join(df1, df2)\n\nIf they do not share a common variable, an approach is to use the option by = c(df1$x, df2$y):\n\nmerged_df = left_join(df1, df2, by = c(df1$x,df2$y))\n\nOf course, this is compatible with the pipe syntax:\n\nmerged_df = df1 %&gt;%\n  left_join(df2)\n\n\n\nReshape datasets\nData manipulation also goes with reshaping the datasets. Let’s say a dataset contains the population at the municipal level. The first column is the municipality ID and each other column in the population for a given year, such that: codgeo, pop1999, pop2000, until pop2023.\nTo obtain a panel dataset (multiple IDs observed multiple times), we need to reshape the datasets in long format (as opposed to wide). The dplyr function is pivot_longer().\n\ndata_long = data_wide %&gt;%\n  pivot_longer(\n    cols = starts_with(\"pop\"), # Might have used -codgeo\n    names_to = \"year\",         # New col name\n    values_to = \"population\",  # New col name\n    names_prefix = \"pop\"       # Remove the prefix \n  ) %&gt;%\n  mutate(year = as.integer(year)) # Not necessary, but usually year is numeric\n\nThe counterpart function is pivot_wider().\n\n\nOther manipulations\nIn dplyr, it is possible to manipulate data using the following functions:\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\nfilter()\nSelects rows based on logical conditions (eg, keep Ile de France)\n\n\nselect()\nChooses columns by name\n\n\narrange()\nReorders rows based on column values\n\n\ndistinct()\nReturns unique rows\n\n\nslice()\nSelects rows by position or helper functions (e.g., slice_head())\n\n\nbind_rows()\nStack two dataframes by rows\n\n\nbind_cols()\nCombine two dataframes side by side\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\nOpen the population dataset /raw/idf_pop.csv and check if is clean\nDescribe it\nMake it long with codgeo as the ID and a year column\nExtract the most recent year (ideally, using a function)\nOpen the housing cost dataset raw/idf_rents.csv\nMerge the population and the housing cost datasets on municipality ID\nSave the newly merged dataset in .csv in an appropriate subfolder\n\nThis latter dataset will be our main dataset for the rest of the class.",
+    "crumbs": [
+      "Open data"
+    ]
+  }
+]

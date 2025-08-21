@@ -1,0 +1,94 @@
+---
+title: "Descriptive statistics"
+format: html
+editor: visual
+toc: true
+toc-title: ""
+toc-location: right
+---
+
+```{r, echo=F,eval=T,message=F,warning=F}
+packages <- c("ggplot2", "readxl", "dplyr", "tidyr","xtable")
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+## Roadmap
+
+In this part, we are going to learn how to:
+
+-   Compute summary statistics
+-   Export them into `.tex` file
+-   Run simple linear regressions
+
+So far, please check that you:
+
+-   [ ] Opened RStudio, wrote your preambule, created a `path` object
+-   [ ] Load the data `idf_data.csv` into RStudio
+-   [ ] Load the package `dplyr`
+
+## Descriptive statistics
+
+### Definition
+
+Descriptive statistics summarize and organize data to make it easier to understand, often using measures such as mean, median, variance, standard deviation, but also the number of observations.
+
+### Implementation
+
+In R, descriptive statistics can be implemented using built-in functions such as `mean()`, `median()`, `sd()`, and `summary()`, or through the `dplyr` package for more flexible and readable workflows. The key function is `summarize()` (or `summarise()`, R is relatively flexible between UK and US English).
+
+If you want to summarize by group, make sure to group your data first using `group_by()`.
+
+### Departmental population
+
+The first question we want to answer is fairly simple: what is the population in each *département*?
+
+::: callout-tip
+## Exercise
+
+From the `idf_data` data, create a new data frame with the population at the *département* level.
+
+1.  Create a variable with the *dep* ID (hint: use `substr()` to extract the first two digits of the municipal ID.
+2.  Group by *département* and compute the sum of population
+:::
+
+### Housing price by city size
+
+Now, we want to test if city size correlates with price. A visual approach would be interesting (and we are actually going to do it later on), but so far, we stick with the numeric approach.
+
+How can we proceed?
+
+::: callout-tip
+## Exercise
+
+From the `idf_data` data, create a new data frame which provides the first/second/third quartile as well as the mean of housing cost by group of city sizes. You decide on the definition of the groups.
+:::
+
+## LaTeX export
+
+## Linear regression
+
+The point of this class is not to teach you much about linear regression. The baseline model is:
+
+$$
+y_i = \alpha + \beta x_i + e_i 
+$$
+
+The obtained coefficient in this model gives the correlation between $x_i$ and $y_i$. Under specific conditions (notably, see the Gauss-Markov theorem), it is possible to draw causal conclusions on the impact of $x$ on $y$, but this is beyond the scope of this class.
+
+The base function for linear regression is `lm(y ~ x, data)`. However, I highlight a much more powerful and flexible package, either to regress but also to export results, `fixest`, which works with the same syntax and allows to implement so many more linear models and extensions.
+
+::: callout-tip
+## Exercise
+
+1.  What is the correlation coefficient between population and housing cost?
+2.  Create two new columns: log population and log housing cost
+3.  Rerun the model with the logged variables. Do the results make sense?
+:::
+
+To export, we rely on...

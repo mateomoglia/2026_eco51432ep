@@ -1,0 +1,189 @@
+---
+title: "Open data"
+format: html
+editor: visual
+toc: true
+toc-title: ""
+toc-location: right
+---
+
+```{r, echo=F,eval=T,message=F,warning=F}
+packages <- c("ggplot2", "readxl", "dplyr", "tidyr","xtable")
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+## Roadmap
+
+In this section, we are going to learn how to:
+
+-   Open datasets
+-   Perform simple data cleaning tasks
+
+## Open datasets
+
+### Data format
+
+As you may know, data come in various formats. Here are some common formats:
+
+| Extension  | Format  | Description                 | Efficiency ⭐ |
+|------------|---------|-----------------------------|---------------|
+| `.csv`     | CSV     | Comma-separated values      | ⭐⭐          |
+| `.tsv`     | TSV     | Tab-separated values        | ⭐⭐          |
+| `.xlsx`    | XLSX    | Excel spreadsheet           | ⭐            |
+| `.RData`   | RData   | R’s format                  | ⭐⭐⭐        |
+| `.json`    | JSON    | JavaScript                  | ⭐⭐          |
+| `.parquet` | PARQUET | Columnar storage            | ⭐⭐⭐⭐⭐    |
+| `.sql`     | SQL     | Structured database storage | ⭐⭐⭐⭐      |
+
+Many other formats exist, depending on the source or the type of data stored (eg, spatial data).
+
+### Open data in R
+
+We are going to manipulate mostly `.csv` database. There are non-proprietary and can be opened by virtually all softwares. This is not the most efficient way to store data. If you manipulate *very* large database (tens of millions of observations with hundreds of columns), I advise you to use `.parquet`.
+
+Base R includes a function to open `.csv` files with the function `read.csv2()`. Some packages might be required to open other formats. To open large `.csv` dataset, I advise you to use the `fread()` function from the package `data.table`.
+
+The syntax is:
+
+```{r, eval = F}
+data = read.csv2(path = "C:/your/path/data_to_open.csv")
+```
+
+### Write data
+
+Once you are done cleaning the data, you might want to save your dataset (this is actually good practice!). Most functions to read data, have a writing function counterpart. Hence:
+
+```{r, eval = F}
+write.csv2(data, path = "C:/your/path/name_of_the_dataset.csv")
+```
+
+### Use a `paste()`
+
+You might want to save a bit of time, reduce the probability of writing errors, and increase the reliability and reproducibility of your code by using a `path` object within a `paste()` function. This function, from base R, simply concatenates two strings. For instance `paste("Hello","world",sep = " ")` will produce `"Hello world"`. An alternative function is `paste0()` which, by default, concatenates without space. Hence, `paste("Hello","world",sep = "")` and `paste0("Hello","world")` would be stricly equivalent and prints `Helloword`.
+
+It comes handy with the `read.csv2()` and the `write.csv2()` functions. Instead of rewriting the total length each time, you can call the `path` object you created earlier on. If the dataset `idf_data.csv` is stored in the subfolder `/data`, it is easy to open it:
+
+```{r, eval = F}
+path = "/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep"
+
+data = read.csv2(path = paste0(path,"/data/idf_data.csv"))
+```
+
+It is useful if you share code with someone. You need to change only the line with the path, instead of the whole code.
+
+### Discover the data
+
+I prepared a dataset, mainly drawn from INSEE data, and downloaded from the Institut Paris Region, a research organization on urbanism in the Ile-de-France region. It contains various socio-economic variables at the municipality (and Paris' arrondissement) level. It contains information on demographic characteristics, income, and on housing market variables.
+
+The codebook contains all variables and a quick description.
+
+## Data cleaning
+
+Data cleaning refers to going from a raw dataset to a dataset than can be used and manipulated efortlessly. Below, here are some examples of data cleaning procedures:
+
+-   Format column names (eg, replace spaces with underscores with function `rename()`);
+-   Remove missing values if they are *real* missing values with `mutate()` and `ifelse()`;
+-   Replace weird values by NAs or 0s (eg, most INSEE missing wage values are 99999 and should be refered as NAs, and not as 99999) with `mutate()` and `ifelse()`;
+-   Clean/create ID variables (for instance, municipal ID in France is made of the *département* code in 2-digit and the municipality in 3-digit. To create a municipal ID, one needs to concatenate both) with `mutate()` and `paste0()`;
+-   Put variables in the right format (eg, numeric variables such as wage should be... numeric and not string -- super frequent with `.csv` datasets that do not store the column format) with `mutate()` and `as.numeric()` or `as.character()`;
+-   Overall visual inspection (check if no weird values, use the `summary()` or `head()` functions)
+
+Although time consuming, this step is particularly important to (i) familiarize with the data and (ii) save precious time when it comes to the data analysis.
+
+Usually, data come from a codebook, a dictionnary, or some kind of documentation (another dataset or a `.pdf`). It is super useful to read them carefully to understand how data are reported (missing values, column names, variable formatting) .
+
+For the purpose of the class, data are already cleaned but never **take data as face value**!
+
+## Data manipulation
+
+### Merge datasets
+
+In real world situation, data come from many sources and/or are delivered in many datasets (one per year, or per area, for instance). Then, you want to **merge** them to obtain a bigger and more insightful datasets.
+
+::: callout-note
+Because R is an objet-based language, you can manipulate several datasets within the same function. However, this is perilous as you have to make sure that they have the same dimensions, are formated the same, etc. Merging reduces the probability to face those issues
+:::
+
+In `dplyr`, the merging is done through the `joint` functions. A join between a `df1` and a `df2` has to be done on at least one joining variable. There are several types of joints:
+
+| Join Type | Description |
+|------------------------|-----------------------------------------------|
+| `inner_join()` | Returns rows with matching keys in both tables |
+| `left_join()` | Returns all rows from the left table, with matches from the right if present |
+| `right_join()` | Returns all rows from the right table, with matches from the left if present |
+| `full_join()` | Returns all rows from both tables, matching where possible |
+| `semi_join()` | Returns rows from the left table that have a match in the right table |
+| `anti_join()` | Returns rows from the left table that do not have a match in the right table |
+
+Hence, the code should look like that:
+
+```{r, echo = T, eval = F}
+merged_df = left_join(df1, df2)
+```
+
+If they do not share a common variable, an approach is to use the option `by = c(df1$x, df2$y)`:
+
+```{r, echo = T, eval = F}
+merged_df = left_join(df1, df2, by = c(df1$x,df2$y))
+```
+
+Of course, this is compatible with the pipe syntax:
+
+```{r, echo = T, eval = F}
+merged_df = df1 %>%
+  left_join(df2)
+```
+
+### Reshape datasets
+
+Data manipulation also goes with reshaping the datasets. Let's say a dataset contains the population at the municipal level. The first column is the municipality ID and each other column in the population for a given year, such that: `codgeo`, `pop1999`, `pop2000`, until `pop2023`.
+
+To obtain a panel dataset (multiple IDs observed multiple times), we need to reshape the datasets in **long format** (as opposed to wide). The `dplyr` function is `pivot_longer()`.
+
+```{r, echo = T, eval = F}
+data_long = data_wide %>%
+  pivot_longer(
+    cols = starts_with("pop"), # Might have used -codgeo
+    names_to = "year",         # New col name
+    values_to = "population",  # New col name
+    names_prefix = "pop"       # Remove the prefix 
+  ) %>%
+  mutate(year = as.integer(year)) # Not necessary, but usually year is numeric
+```
+
+The counterpart function is `pivot_wider()`.
+
+### Other manipulations
+
+In `dplyr`, it is possible to manipulate data using the following functions:
+
+| Function | Description |
+|------------------------|-----------------------------------------------|
+| `filter()` | Selects rows based on logical conditions (eg, keep Ile de France) |
+| `select()` | Chooses columns by name |
+| `arrange()` | Reorders rows based on column values |
+| `distinct()` | Returns unique rows |
+| `slice()` | Selects rows by position or helper functions (e.g., `slice_head()`) |
+| `bind_rows()` | Stack two dataframes by rows |
+| `bind_cols()` | Combine two dataframes side by side |
+
+::: callout-tip
+## Exercise
+
+1.  Open the population dataset `/raw/idf_pop.csv` and check if is clean
+2.  Describe it
+3.  Make it long with `codgeo` as the ID and a `year` column
+4.  Extract the most recent year (ideally, using a function)
+5.  Open the housing cost dataset `raw/idf_rents.csv`
+6.  Merge the population and the housing cost datasets on municipality ID
+7.  Save the newly merged dataset in `.csv` in an appropriate subfolder
+
+This latter dataset will be our main dataset for the rest of the class.
+:::
+

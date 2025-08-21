@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mateo Moglia (CREST-IPParis)">
+<meta name="dcterms.date" content="2025-09-01">
+
+<title>Introduction to R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-bf8d43e5e6af1022e6240ff11ad89265.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="2025_intro_r.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Introduction to R</h1>
+<p class="subtitle lead">Master DEPP - Institut Polytechnique de Paris</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://mateomoglia.github.io">Mateo Moglia</a> (CREST-IPParis) </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 1, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction-to-r" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-r">Introduction to R</h2>
+<p>Welcome to the <strong>Intro to R</strong> course!</p>
+<ul>
+<li>8 hours of class to learn how to do simple statistical tasks in R</li>
+<li>No exam, only in-class (non-graded) exercises</li>
+<li>Use of real world data (from Ile-de-France region)</li>
+</ul>
+<hr>
+</section>
+<section id="presentation" class="level2">
+<h2 class="anchored" data-anchor-id="presentation">Presentation</h2>
+<ul>
+<li>PhD student in Economics in CREST - Institut Polytechnique de Paris</li>
+<li>Interest in <strong>spatial economics</strong> (geographical distribution of economic activity in space)</li>
+<li>Three areas of interest: population ageing, desindustrialization, climate change</li>
+</ul>
+<hr>
+</section>
+<section id="general-tips" class="level2">
+<h2 class="anchored" data-anchor-id="general-tips">General tips</h2>
+<section id="have-an-intuitive-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="have-an-intuitive-workflow">Have an intuitive workflow</h3>
+<pre class="plaintext"><code>/Users/mmoglia/Dropbox/
+                      ├── Documents/
+                      │   ├── perso/
+                      ├── Downloads/
+                      ├── Music/
+                      ├── Pictures/
+                      │   ├── famille/
+                      │   ├── vacances/
+                      ├── courses/
+                      │   ├── polytechnique/
+                      │   │ ├── 2026_eco51432ep/
+                      │   │ │       ├── code/
+                      │   │ │       ├── output/
+                      │   │ │       ├── raw/
+                      │   │ │       ├── temp/
+                      │   │ ├── 2025_eco1s002/
+                      ├── research/</code></pre>
+<hr>
+</section>
+</section>
+<section id="general-tips-1" class="level2">
+<h2 class="anchored" data-anchor-id="general-tips-1">General tips</h2>
+<section id="research-has-to-be-replicable" class="level3">
+<h3 class="anchored" data-anchor-id="research-has-to-be-replicable">Research has to be replicable</h3>
+<ul>
+<li>Track source of every dataset you access with a link and a date</li>
+<li>Write (and save!) all codes you use to produce output</li>
+<li>Comment, annotate, code</li>
+<li>Make stuff self-explanatory for the future you!</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>More and more journals and institutions require authors to provide replication packages, containing all codes and data, from 0 to the final output.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="general-tips-2" class="level2">
+<h2 class="anchored" data-anchor-id="general-tips-2">General tips</h2>
+<section id="advice-for-dissemination" class="level3">
+<h3 class="anchored" data-anchor-id="advice-for-dissemination">Advice for dissemination</h3>
+<ul>
+<li>Use colorblind-friendly color palettes</li>
+<li>Make labelling self-explanatory</li>
+<li><strong>ALWAYS</strong> put a legend</li>
+<li>Check the quality of the output (not blurry, large enough font)</li>
+<li>Use LaTeX! <span class="emoji" data-emoji="grimacing">😬</span></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="what-is-r" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-r">What is R?</h2>
+<ul>
+<li>R is a free and open source software widely used in quantitative social sciences, engineering, statistics, and other scientific fields</li>
+<li>R is a <em>language</em> and can be called from many IDEs (for instance, VSCode) or directly from the command panel</li>
+<li>We are going to use <strong>RStudio</strong>, an IDE provided by POSIT</li>
+<li>Object-based software. Objects are usually sort of matrices, with columns and rows</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Everyone of you should have it on your computer, ready to use</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="what-are-we-going-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-we-going-to-do">What are we going to do</h2>
+<p>The plan is as following:</p>
+<ol type="1">
+<li>Present the dataset</li>
+<li>Open it in R</li>
+<li>Data cleaning</li>
+<li>Data visualization</li>
+<li>Statistical analysis</li>
+<li>[Bonus] Geographical data visualization</li>
+</ol>
+<hr>
+</section>
+<section id="data-presentation" class="level2">
+<h2 class="anchored" data-anchor-id="data-presentation">Data presentation</h2>
+<p>Data are at the municipal level for the Ile-de-France region in contemporaneous years. They contain several socio-demographic <em>variables</em>.</p>
+<div style="height: 400px; overflow-y: auto;">
+<table class="table-striped table-hover caption-top table">
+<caption>Variables used in the analysis<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></caption>
+<colgroup>
+<col style="width: 34%">
+<col style="width: 32%">
+<col style="width: 18%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable name</th>
+<th>Description</th>
+<th>Source</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>codgeo</td>
+<td>COG</td>
+<td>INSEE</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td>area</td>
+<td>Area (km2)</td>
+<td>IGN</td>
+<td>NA</td>
+</tr>
+<tr class="odd">
+<td>political</td>
+<td>Political partisanship of the mayor</td>
+<td>Ministry of Interior</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td>medical</td>
+<td>General practitionners</td>
+<td>FINESS</td>
+<td>2022</td>
+</tr>
+<tr class="odd">
+<td>schools</td>
+<td>Schools</td>
+<td>BPE</td>
+<td>2022</td>
+</tr>
+<tr class="even">
+<td>med_inc</td>
+<td>Median income (in euro)</td>
+<td>Filosofi</td>
+<td>2020</td>
+</tr>
+<tr class="odd">
+<td>unemp</td>
+<td>Unemployment rate (15-64)</td>
+<td>RP</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td>scol</td>
+<td>Schooling rate (2-5)</td>
+<td>Ministry of Education</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td>poor</td>
+<td>Poverty rate (&lt;60% median)</td>
+<td>Filosofi</td>
+<td>2020</td>
+</tr>
+<tr class="even">
+<td>housing_unit</td>
+<td>Number of housing units</td>
+<td>RP</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td>pop_00_10</td>
+<td>Pop. (01-10)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td>pop_10_20</td>
+<td>Pop. (11-20)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td>pop_20_30</td>
+<td>Pop. (21-30)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td>pop_30_40</td>
+<td>Pop. (31-40)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td>pop_40_50</td>
+<td>Pop. (41-50)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td>pop_50_60</td>
+<td>Pop. (51-60)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td>pop_60_70</td>
+<td>Pop. (61-70)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="even">
+<td>pop_70_80</td>
+<td>Pop. (71-80)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+<tr class="odd">
+<td>pop_80_90</td>
+<td>Pop. (81-90)</td>
+<td>INSEE</td>
+<td>2021</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</section>
+<section id="data-presentation-1" class="level2">
+<h2 class="anchored" data-anchor-id="data-presentation-1">Data presentation</h2>
+<section id="some-remarks-on-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="some-remarks-on-the-data">Some remarks on the data</h3>
+<ul>
+<li>Data are identified at the municipal level with <code>codgeo</code></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>codgeo</code>, from the <em>Code Officiel Geographique</em> (COG) is different from the zip code. For instance, Paris 14’s codgeo is 75114 whereas the zipcode is 75014.</p>
+</div>
+</div>
+<ul>
+<li>Data are from administrative sources, they can be trusted</li>
+<li>They come in a nice format because I cleaned them beforehand, this is not always the case!</li>
+<li>Data are in <code>.csv</code> format. Do you all know what this is?</li>
+<li>You can download them (here)[link to moodle] and save it in <code>./2026_eco51432ep/raw/</code></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="first-hand-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="first-hand-in-r">First hand in R</h2>
+<section id="set-up-r" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-r">Set-up R</h3>
+<ul>
+<li>You will write everything in a <strong>script</strong> and <strong>run</strong> from that script</li>
+<li>Base R contains a lot of handy built-in <strong>functions</strong>, but we are going to use <strong>tidyverse</strong> environment, the most widely used package in R</li>
+<li>It is very intuitive to use:
+<ul>
+<li>Apply functions to an object</li>
+<li>Those functions can be applied in chain thanks to a pipe <code>%&gt;%</code></li>
+</ul></li>
+</ul>
+<p>Your task:</p>
+<ol type="1">
+<li>Open RStudio</li>
+<li>Open a new script</li>
+<li>Prepare it with the following presentation</li>
+</ol>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     This script opens the dataset for the "Introduction to R class and manipulate it</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     Mateo Moglia, July 2025</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#_______________________________________________________________________________</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">gc</span>()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Install and load the packages dplyr, ggplot2, and sf</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">install.packages</span>(<span class="st">"sf"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(dplyr)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(sf)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Create an object that "stores" the path</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      path      <span class="ot">=</span> <span class="st">"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="open-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="open-the-dataset">Open the dataset</h2>
+<ul>
+<li>To open the dataset we use the built-in function <code>read.csv2()</code></li>
+<li>To avoid rewriting the path each time we call it, we are going to use the function <code>paste0</code> to concatenate the path and other words</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    database <span class="ot">=</span> <span class="fu">read.csv2</span>(<span class="fu">paste0</span>(path,<span class="st">"/raw/idf_data_2022.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="describe-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="describe-the-dataset">Describe the dataset</h2>
+<ul>
+<li>There are several built-in functions to describe the dataset such as <code>summary()</code>, <code>head()</code>, <code>length()</code>, <code>class()</code>, <code>names()</code></li>
+<li>To call a specific column, two options:
+<ol type="1">
+<li>Using the <code>$</code> operator, eg <code>database$pop_00_10</code></li>
+<li>Using their position, eg <code>database[4]</code> call the fourth column of the data frame</li>
+</ol></li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Your task
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Print the column names and summarize some of them. What do you notice?</p>
+</div>
+</div>
+</section>
+<section id="first-data-manipulation" class="level2">
+<h2 class="anchored" data-anchor-id="first-data-manipulation">First data manipulation</h2>
+<section id="compute-total-population-and-density" class="level3">
+<h3 class="anchored" data-anchor-id="compute-total-population-and-density">Compute total population and density</h3>
+<ul>
+<li>We create a new dataset <code>density</code> containing 3 columns: the <code>codgeo</code> identifier, the total population <code>pop_tot</code>, and the population density.</li>
+<li>Then, we merge it to the <code>database</code> data frame</li>
+<li>We need to do three tasks:
+<ol type="1">
+<li>Make the computations</li>
+<li>Select the required columns</li>
+<li>Assign it to a new data object</li>
+<li>Merge it</li>
+</ol></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    density <span class="ot">=</span> database <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use mutate() to create a new variable</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">tot_pop =</span> pop_00_10 <span class="sc">+</span> pop_10_20 <span class="sc">+</span> pop_20_30 <span class="sc">+</span> pop_30_40 <span class="sc">+</span> pop_40_50 <span class="sc">+</span> pop_50_60 <span class="sc">+</span> pop_60_70 <span class="sc">+</span> pop_70_80 <span class="sc">+</span> pop_80_90) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">density =</span> tot_pop<span class="sc">/</span>area) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use select() to select the variables</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(codgeo, pop_tot, density)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use left_join() to merge 'from the left' (keep all in database)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    database <span class="ot">=</span> database <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(density, <span class="at">by =</span> <span class="st">"codgeo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We could have directly computed <code>density</code> and <code>tot_pop</code> in <code>database</code> directly! Using a combination <code>rowSums()</code>, <code>across()</code>, and <code>starts_with()</code>, we can compute <code>tot_pop</code> more efficiently. Try it!</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h2>
+<section id="two-approaches" class="level3">
+<h3 class="anchored" data-anchor-id="two-approaches">Two approaches</h3>
+<ul>
+<li>Create a new database with <code>summarize()</code></li>
+<li>Use another package to export to <code>.tex</code></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="grouping-variables" class="level2">
+<h2 class="anchored" data-anchor-id="grouping-variables">Grouping variables</h2>
+<section id="summary-statistics-by-group" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics-by-group">Summary statistics by group</h3>
+<ul>
+<li>Create an ID by department</li>
+<li>Create new columns with dep. mean</li>
+<li>Compare the municipal variable with the dep. mean (boolean)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="our-first-data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="our-first-data-visualization">Our first data visualization</h2>
+<section id="scatter-plot-between-mean-income-and-population-density" class="level3">
+<h3 class="anchored" data-anchor-id="scatter-plot-between-mean-income-and-population-density">Scatter plot between mean income and population density</h3>
+<ul>
+<li>Standard urban economics results: density increases income</li>
+<li>Correlation? Causality?</li>
+<li>We can investigate it!</li>
+<li>Add line, change legend</li>
+<li>Make it by group (overlay and facet)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="correlation-heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-heatmap">Correlation heatmap</h2>
+<ul>
+<li>Heatmap of correlation (see here https://albert-rapp.de/posts/ggplot2-tips/24_correlation_heat_map/24_correlation_heat_map.html)</li>
+</ul>
+<hr>
+</section>
+<section id="box-plot" class="level2">
+<h2 class="anchored" data-anchor-id="box-plot">Box plot</h2>
+<ul>
+<li>Box plot/violin by departement</li>
+</ul>
+<hr>
+</section>
+<section id="plotly" class="level2">
+<h2 class="anchored" data-anchor-id="plotly">Plotly?</h2>
+<ul>
+<li>Heatmap of correlation (see here https://albert-rapp.de/posts/ggplot2-tips/24_correlation_heat_map/24_correlation_heat_map.html)</li>
+</ul>
+<hr>
+</section>
+<section id="regression" class="level2">
+<h2 class="anchored" data-anchor-id="regression">Regression</h2>
+<section id="make-a-regression-with-fixest" class="level3">
+<h3 class="anchored" data-anchor-id="make-a-regression-with-fixest">Make a regression with <code>fixest</code></h3>
+<ul>
+<li></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="output-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="output-the-results">Output the results</h2>
+<section id="in-.pdf-and-in-.tex" class="level3">
+<h3 class="anchored" data-anchor-id="in-.pdf-and-in-.tex">In <code>.pdf</code> and in <code>.tex</code></h3>
+<ul>
+<li></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="maps" class="level2">
+<h2 class="anchored" data-anchor-id="maps">Maps!</h2>
+<section id="hands-on-sf" class="level3">
+<h3 class="anchored" data-anchor-id="hands-on-sf">Hands on <code>sf</code></h3>
+<ul>
+<li>What is a shapefile? What information does it contain?</li>
+<li>Merge with the shapefile</li>
+<li>ggplot empty shapefile</li>
+<li>add information</li>
+</ul>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Dataset was prepared for this class out of several public access sources.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Copyright 2026, Mateo Moglia</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,142 @@
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+packages <- c("ggplot2", "readxl", "dplyr", "tidyr","xtable")
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+data = read.csv2(path = "C:/your/path/data_to_open.csv")
+#
+#
+#
+#
+#
+#
+#
+write.csv2(data, path = "C:/your/path/name_of_the_dataset.csv")
+#
+#
+#
+#
+#
+#
+#
+#
+#
+path = "/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep"
+
+data = read.csv2(path = paste0(path,"/data/idf_data.csv"))
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+merged_df = left_join(df1$x,df2$x)
+#
+#
+#
+#
+#
+merged_df = left_join(df1$x,df2$x)
+#
+#
+#
+#
+#
+#
+#
+#
+#

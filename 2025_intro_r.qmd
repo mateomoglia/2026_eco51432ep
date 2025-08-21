@@ -1,0 +1,338 @@
+---
+title: "Introduction to R"
+subtitle: "Master DEPP - Institut Polytechnique de Paris"
+author: "[Mateo Moglia](https://mateomoglia.github.io) (CREST-IPParis)"
+date: "September 2025"
+format: 
+  revealjs:
+    theme: theme_mm.scss
+    slide-number: true
+    center: true
+    code-line-numbers: true
+    code-fold: true
+    code-tools: true
+    chalkboard: false
+editor: visual
+from: markdown+emoji
+---
+
+```{r lib, include = F}
+library(dplyr)
+library(Rmoji)
+path = "C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002"
+``` 
+
+## Introduction to R
+
+Welcome to the **Intro to R** course!
+
+-   8 hours of class to learn how to do simple statistical tasks in R
+-   No exam, only in-class (non-graded) exercises
+-   Use of real world data (from Ile-de-France region)
+
+---
+
+## Presentation
+
+-   PhD student in Economics in CREST - Institut Polytechnique de Paris
+-   Interest in **spatial economics** (geographical distribution of economic activity in space)
+-   Three areas of interest: population ageing, desindustrialization, climate change
+
+---
+
+## General tips
+### Have an intuitive workflow 
+
+``` plaintext
+/Users/mmoglia/Dropbox/
+                      ├── Documents/
+                      │   ├── perso/
+                      ├── Downloads/
+                      ├── Music/
+                      ├── Pictures/
+                      │   ├── famille/
+                      │   ├── vacances/
+                      ├── courses/
+                      │   ├── polytechnique/
+                      │   │ ├── 2026_eco51432ep/
+                      │   │ │       ├── code/
+                      │   │ │       ├── output/
+                      │   │ │       ├── raw/
+                      │   │ │       ├── temp/
+                      │   │ ├── 2025_eco1s002/
+                      ├── research/
+```
+
+---
+
+## General tips
+### Research has to be replicable 
+
+-   Track source of every dataset you access with a link and a date
+-   Write (and save!) all codes you use to produce output
+-   Comment, annotate, code
+-   Make stuff self-explanatory for the future you!
+
+:::callout-tip
+More and more journals and institutions require authors to provide replication packages, containing all codes and data, from 0 to the final output.
+:::
+
+---
+
+## General tips
+### Advice for dissemination
+
+-   Use colorblind-friendly color palettes
+-   Make labelling self-explanatory
+-   **ALWAYS** put a legend
+-   Check the quality of the output (not blurry, large enough font)
+-   Use LaTeX! :grimacing:
+
+---
+
+## What is R?
+
+-   R is a free and open source software widely used in quantitative social sciences, engineering, statistics, and other scientific fields
+-   R is a *language* and can be called from many IDEs (for instance, VSCode) or directly from the command panel
+-   We are going to use **RStudio**, an IDE provided by POSIT
+-   Object-based software. Objects are usually sort of matrices, with columns and rows
+
+:::callout-important
+Everyone of you should have it on your computer, ready to use
+:::
+
+---
+
+## What are we going to do
+
+The plan is as following:
+
+1.    Present the dataset
+2.    Open it in R
+3.    Data cleaning
+4.    Data visualization
+5.    Statistical analysis
+6.    [Bonus] Geographical data visualization
+
+---
+
+## Data presentation
+
+Data are at the municipal level for the Ile-de-France region in contemporaneous years. They contain several socio-demographic *variables*.
+
+<div style="height: 400px; overflow-y: auto;">
+
+| Variable name | Description  | Source | Year |
+|---------------|--------------|--------|------|
+| codgeo        | COG          | INSEE  | 2022 |
+| area          | Area (km2)   | IGN    | NA   |
+| political     | Political partisanship of the mayor | Ministry of Interior  | 2022 |
+| medical       | General practitionners              | FINESS                | 2022 |
+| schools       | Schools                             | BPE                   | 2022 |
+| med_inc       | Median income (in euro)             | Filosofi              | 2020 |
+| unemp         | Unemployment rate (15-64)           | RP                    | 2021 |
+| scol          | Schooling rate (2-5)                | Ministry of Education | 2021 |
+| poor          | Poverty rate (<60% median)          | Filosofi              | 2020 |
+| housing_unit  | Number of housing units             | RP                    | 2021 |
+| pop_00_10     | Pop. (01-10) | INSEE  | 2021 |
+| pop_10_20     | Pop. (11-20) | INSEE  | 2021 |
+| pop_20_30     | Pop. (21-30) | INSEE  | 2021 |
+| pop_30_40     | Pop. (31-40) | INSEE  | 2021 |
+| pop_40_50     | Pop. (41-50) | INSEE  | 2021 |
+| pop_50_60     | Pop. (51-60) | INSEE  | 2021 |
+| pop_60_70     | Pop. (61-70) | INSEE  | 2021 |
+| pop_70_80     | Pop. (71-80) | INSEE  | 2021 |
+| pop_80_90     | Pop. (81-90) | INSEE  | 2021 |
+
+: Variables used in the analysis[^1] {.striped .hover}
+
+</div>
+
+[^1]: Dataset was prepared for this class out of several public access sources.
+
+--- 
+
+## Data presentation
+### Some remarks on the data 
+
+-   Data are identified at the municipal level with `codgeo`
+
+:::callout-warning
+The `codgeo`, from the *Code Officiel Geographique* (COG) is different from the zip code. For instance, Paris 14's codgeo is 75114 whereas the zipcode is 75014.
+:::
+
+-   Data are from administrative sources, they can be trusted
+-   They come in a nice format because I cleaned them beforehand, this is not always the case!
+-   Data are in `.csv` format. Do you all know what this is?
+-   You can download them (here)[link to moodle] and save it in `./2026_eco51432ep/raw/`
+
+--- 
+
+## First hand in R
+### Set-up R
+
+-   You will write everything in a **script** and **run** from that script 
+-   Base R contains a lot of handy built-in **functions**, but we are going to use **tidyverse** environment, the most widely used package in R
+-   It is very intuitive to use:
+    -   Apply functions to an object
+    -   Those functions can be applied in chain thanks to a pipe `%>%`
+    
+Your task:
+
+1.    Open RStudio
+2.    Open a new script 
+3.    Prepare it with the following presentation
+
+---
+
+```{r setup, echo=T, eval=F}
+#| code-fold: false
+
+#_______________________________________________________________________________
+#
+#     This script opens the dataset for the "Introduction to R class and manipulate it
+#     
+#     Mateo Moglia, July 2025
+#
+#_______________________________________________________________________________
+
+      rm(list=ls())
+      gc()
+      
+      # Install and load the packages dplyr, ggplot2, and sf
+      install.packages("dplyr")
+      install.packages("ggplot2")
+      install.packages("sf")
+      library(dplyr)
+      library(ggplot2)
+      library(sf)
+      
+      # Create an object that "stores" the path
+      path      = "C:/Users/mateomoglia/Dropbox/courses/polytechnique/2025_eco1s002"
+      
+```
+
+---
+
+## Open the dataset
+
+-   To open the dataset we use the built-in function `read.csv2()`
+-   To avoid rewriting the path each time we call it, we are going to use the function `paste0` to concatenate the path and other words
+
+```{r open the data, echo=T, eval = F}
+    database = read.csv2(paste0(path,"/raw/idf_data_2022.csv"))
+```
+
+## Describe the dataset
+
+-   There are several built-in functions to describe the dataset such as `summary()`, `head()`, `length()`, `class()`, `names()`
+-   To call a specific column, two options:
+    1.    Using the `$` operator, eg `database$pop_00_10`
+    2.    Using their position, eg `database[4]` call the fourth column of the data frame
+
+::: {.callout-note icon=false}
+
+## Your task
+
+Print the column names and summarize some of them. What do you notice?
+
+:::
+
+## First data manipulation
+### Compute total population and density
+
+-   We create a new dataset `density` containing 3 columns: the `codgeo` identifier, the total population `pop_tot`, and the population density.
+-   Then, we merge it to the `database` data frame
+-   We need to do three tasks:
+    1.    Make the computations
+    2.    Select the required columns
+    3.    Assign it to a new data object
+    4.    Merge it
+
+
+```{r density, echo=T, eval = F}
+    density = database %>%
+        # Use mutate() to create a new variable
+        mutate(tot_pop = pop_00_10 + pop_10_20 + pop_20_30 + pop_30_40 + pop_40_50 + pop_50_60 + pop_60_70 + pop_70_80 + pop_80_90) %>%
+        mutate(density = tot_pop/area) %>%
+        # Use select() to select the variables
+        select(codgeo, pop_tot, density)
+      
+    # Use left_join() to merge 'from the left' (keep all in database)
+    database = database %>% left_join(density, by = "codgeo")
+
+```
+
+:::callout-tip
+We could have directly computed `density` and `tot_pop` in `database` directly! Using a combination `rowSums()`, `across()`, and `starts_with()`, we can compute `tot_pop` more efficiently. Try it!
+:::
+
+---
+
+## Summary statistics
+### Two approaches
+
+-   Create a new database with `summarize()`
+-   Use another package to export to `.tex` 
+
+---
+
+## Grouping variables
+### Summary statistics by group
+
+-   Create an ID by department
+-   Create new columns with dep. mean
+-   Compare the municipal variable with the dep. mean (boolean)
+
+---
+
+## Our first data visualization
+### Scatter plot between mean income and population density
+
+-   Standard urban economics results: density increases income
+-   Correlation? Causality?
+-   We can investigate it!
+-   Add line, change legend
+-   Make it by group (overlay and facet)
+
+---
+
+## Correlation heatmap
+
+-   Heatmap of correlation (see here https://albert-rapp.de/posts/ggplot2-tips/24_correlation_heat_map/24_correlation_heat_map.html)
+
+---
+
+## Box plot
+
+-   Box plot/violin by departement
+
+---
+
+## Plotly?
+
+-   Heatmap of correlation (see here https://albert-rapp.de/posts/ggplot2-tips/24_correlation_heat_map/24_correlation_heat_map.html)
+
+---
+
+## Regression
+### Make a regression with `fixest` 
+
+-   
+
+---
+
+## Output the results
+### In `.pdf` and in `.tex`
+
+-   
+
+---
+
+## Maps!
+### Hands on `sf`
+
+-   What is a shapefile? What information does it contain?
+-   Merge with the shapefile
+-   ggplot empty shapefile
+-   add information

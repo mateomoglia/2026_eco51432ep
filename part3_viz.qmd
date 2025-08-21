@@ -1,0 +1,52 @@
+---
+title: "Data visualisation"
+format: html
+editor: visual
+toc: true
+toc-title: ""
+toc-location: right
+---
+
+```{r, echo=F,eval=T,message=F,warning=F}
+packages <- c("ggplot2", "readxl", "dplyr", "tidyr","xtable")
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+```
+
+## Roadmap
+
+In this part, we are going to learn how to:
+
+-   Make appealing data visualization with `ggplot2` package
+-   If time allows: make maps
+-   If time allows: make interactive plots
+
+## Plots with `ggplot2`
+
+### General description 
+
+This package is a workhorse of data visualization in R. The structure is somewhat similar to the `dplyr` approach. The idea is to apply to a `ggplot()` object a series of functions to add elements to the plot and control the appearance of the latter. The syntax requires:
+
+-   Data, from which the graph will be made
+-   Mapping, a set of instructions to "structure" the appearance of the graphs. Usually, it sets the axes, the grouping variables, among other things. It is also referred as *aesthetics*
+-   Layers, which converts the data and the mapping into geometries (points, lines, regression lines, bar charts, etc.)
+-   [opt.] Scales, to control the appearance of the mapping (axes length, colors, etc.)
+-   [opt.] Guides/Themes, to control the general appearance of the graph
+
+Usually, the `ggplot` function takes two main arguments and one to many sub-arguments. The two main arguments are (i) the data on which the visualization is required and (ii) an **aesthetic**. The aesthetic controls the key element of the visualization, such as the `x` and `y` axes or the grouping colors/linetypes. 
+
+Let's imagine we have a dataset `df` with `x_val` and `y_val` values and a grouping variable (gender, country, etc.). Hence, to plot a scatter plot, we would code:
+
+```{r, eval = F, echo = T}
+ggplot(df, mapping = aes(x = x_val, y = y_val, colour = gender)) + # Set the graph
+    geom_point() + # Add points
+    theme_void() # Control the general appearance of the graph
+```
+
+### More details
+

@@ -69,8 +69,6 @@ How can we proceed?
 From the `idf_data` data, create a new data frame which provides the first/second/third quartile as well as the mean of housing cost by group of city sizes. You decide on the definition of the groups.
 :::
 
-## LaTeX export
-
 ## Linear regression
 
 The point of this class is not to teach you much about linear regression. The baseline model is:
@@ -81,7 +79,7 @@ $$
 
 The obtained coefficient in this model gives the correlation between $x_i$ and $y_i$. Under specific conditions (notably, see the Gauss-Markov theorem), it is possible to draw causal conclusions on the impact of $x$ on $y$, but this is beyond the scope of this class.
 
-The base function for linear regression is `lm(y ~ x, data)`. However, I highlight a much more powerful and flexible package, either to regress but also to export results, `fixest`, which works with the same syntax and allows to implement so many more linear models and extensions.
+The base function for linear regression is `lm(y ~ x, data)`. However, I highlight a much more powerful and flexible package, either to regress but also to export results, `fixest::feols()`, which works with the same syntax and allows to implement so many more linear models and extensions. 
 
 ::: callout-tip
 ## Exercise
@@ -91,4 +89,84 @@ The base function for linear regression is `lm(y ~ x, data)`. However, I highlig
 3.  Rerun the model with the logged variables. Do the results make sense?
 :::
 
-To export, we rely on...
+## Export to `.tex`
+
+:::callout-important
+If you are not familiar with LaTeX, I more than warmly recommand you to learn it!! The learning curve is extremely steep, it shouldn't take you more than a couple of hours to understand the base of it. The online community is superb and LLMs are extremely efficient at it. A good starting point is to use Overleaf and follow their guide to [learn LaTeX in 30 minutes](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes). 
+:::
+
+Several libraries exist to export tables as `.tex` format (or in plain text, or in html). Among the most popular packages, we are going to use `stargazer`, which is super flexible and well-suited for descriptive statistics, `knitr` which is helpful to export data frames, and the `etable` function from `fixest`. 
+
+1.  Export the count of population
+
+```{r, echo = T, eval = F}
+      # Export the population 
+      stargazer(
+        pop_dep,
+        summary = FALSE,
+        rownames = FALSE,
+        title = "Population by department (2021)",
+        label   = "tab:pop",
+        covariate.labels = c("Dep.", "Population"),
+        notes = "Source: INSEE, Recensement Permanent (2021).",
+        out = paste0(path,"/output/pop_dep.tex")
+      )
+``` 
+
+Let's break down together the function!
+
+2.  Export the rent data
+
+```{r, echo = T, eval = F}
+# Export the housing cost by city size
+      cost_size = cost_size %>%
+        mutate(city_size = recode(city_size,
+                                  "1_vsmall" = "Very Small",
+                                  "2_small"  = "Small",
+                                  "3_medium" = "Medium",
+                                  "4_large"  = "Large",
+                                  "5_vlarge" = "Very Large"
+        )) %>%
+        mutate(type = recode(type,
+                             "appartement" = "Appart.",
+                             "house"       = "House")) %>%
+        mutate(across(where(is.numeric), ~as.numeric(round(.x, 2))))
+      
+      # Export with knitr 
+      export = cost_size %>%
+        mutate(city_size = factor(city_size, levels = c("Very Small", "Small", "Medium", "Large", "Very Large"))) %>%
+        arrange(city_size, type) %>%
+        mutate(city_size = "") %>%
+        select(type, mean, q1, q2, q3) %>%
+        knitr::kable("latex", booktabs = TRUE, longtable = TRUE,
+                     col.names = c("\\hspace{1em}", "Type", "Mean", "Q1", "Q2", "Q3"),
+                     escape = FALSE) %>%
+        # Add group rows for each city_size
+        kableExtra::group_rows("Very Small", 1, 2, latex_gap_space = "0.5em") %>%
+        kableExtra::group_rows("Small", 3, 4, latex_gap_space = "0.5em") %>%
+        kableExtra::group_rows("Medium", 5, 6, latex_gap_space = "0.5em") %>%
+        kableExtra::group_rows("Large", 7, 8, latex_gap_space = "0.5em") %>%
+        kableExtra::group_rows("Very Large", 9, 10, latex_gap_space = "0.5em") %>%
+        kableExtra::kable_styling(latex_options = c("hold_position"))
+      
+      writeLines(export, paste0(path,"/output/cost_size.tex"))
+```
+
+Let's break down the function.
+
+3.  Export the regressions
+
+```{r, eval = F, echo = T}
+      # Export the two regressions with etable
+      setFixest_dict(c(popmun = "Population", log_popmun = "Population (log)",
+                       loy_appartement = "Rent", log_loy_appartement = "Rent (log)" 
+      ))
+      
+      
+      export = etable(reg, tex = T, style.tex = style.tex("aer"), fitstat = ~ r2 + n)
+      writeLines(export, paste0(path,"/output/reg.tex"))
+      
+      export = etable(reg_log, tex = T, style.tex = style.tex("aer"), fitstat = ~ r2 + n)
+      writeLines(export, paste0(path,"/output/reg_log.tex"))
+``` 
+

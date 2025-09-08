@@ -113,7 +113,7 @@ Because R is an objet-based language, you can manipulate several datasets within
 In `dplyr`, the merging is done through the `joint` functions. A join between a `df1` and a `df2` has to be done on at least one joining variable. There are several types of joints:
 
 | Join Type | Description |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | `inner_join()` | Returns rows with matching keys in both tables |
 | `left_join()` | Returns all rows from the left table, with matches from the right if present |
 | `right_join()` | Returns all rows from the right table, with matches from the left if present |
@@ -144,11 +144,11 @@ merged_df = df1 %>%
 
 Data manipulation also goes with reshaping the datasets. Let's say a dataset contains the population at the municipal level. The first column is the municipality ID and each other column in the population for a given year, such that: `codgeo`, `pop1999`, `pop2000`, until `pop2023`.
 
-To obtain a panel dataset (multiple IDs observed multiple times), we need to reshape the datasets in **long format** (as opposed to wide). The `dplyr` function is `pivot_longer()`.
+To obtain a panel dataset (multiple IDs observed multiple times), we need to reshape the datasets in **long format** (as opposed to wide). The function is `pivot_longer()`. This function is from the library `tidyr`. **You need to download it first and load it**.
 
 ```{r, echo = T, eval = F}
 data_long = data_wide %>%
-  pivot_longer(
+  tidyr::pivot_longer(
     cols = starts_with("pop"), # Might have used -codgeo
     names_to = "year",         # New col name
     values_to = "population",  # New col name
@@ -157,14 +157,14 @@ data_long = data_wide %>%
   mutate(year = as.integer(year)) # Not necessary, but usually year is numeric
 ```
 
-The counterpart function is `pivot_wider()`.
+The counterpart function is `tidyr::pivot_wider()`.
 
 ### Other manipulations
 
 In `dplyr`, it is possible to manipulate data using the following functions:
 
 | Function | Description |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | `filter()` | Selects rows based on logical conditions (eg, keep Ile de France) |
 | `select()` | Chooses columns by name |
 | `arrange()` | Reorders rows based on column values |
@@ -177,13 +177,13 @@ In `dplyr`, it is possible to manipulate data using the following functions:
 ## Exercise
 
 1.  Open the population dataset `/raw/idf_pop.csv` and check if is clean
-2.  Describe it
+2.  Create a subset containing only `codgeo` and the columns that start with `popmun`
 3.  Make it long with `codgeo` as the ID and a `year` column
 4.  Extract the most recent year (ideally, using a function)
 5.  Open the housing cost dataset `raw/idf_rents.csv`
-6.  Merge the population and the housing cost datasets on municipality ID
-7.  Save the newly merged dataset in `.csv` in an appropriate subfolder
+6.  Create a dataset with 3 columns: `codgeo`, `loy_sqm_appartment` and `loy_sqm_house`
+7.  Merge the population datasets (population in the most recent year and the population by CSP) and the housing cost datasets on municipality ID
+8.  Save the newly merged dataset in `.csv` in an appropriate subfolder.
 
 This latter dataset will be our main dataset for the rest of the class.
 :::
-

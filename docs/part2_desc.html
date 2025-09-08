@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -172,8 +206,8 @@ window.Quarto = {
   <li><a href="#departmental-population" id="toc-departmental-population" class="nav-link" data-scroll-target="#departmental-population">Departmental population</a></li>
   <li><a href="#housing-price-by-city-size" id="toc-housing-price-by-city-size" class="nav-link" data-scroll-target="#housing-price-by-city-size">Housing price by city size</a></li>
   </ul></li>
-  <li><a href="#latex-export" id="toc-latex-export" class="nav-link" data-scroll-target="#latex-export">LaTeX export</a></li>
   <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression">Linear regression</a></li>
+  <li><a href="#export-to-.tex" id="toc-export-to-.tex" class="nav-link" data-scroll-target="#export-to-.tex">Export to <code>.tex</code></a></li>
   </ul>
 </nav>
     </div>
@@ -265,9 +299,6 @@ Exercise
 </div>
 </section>
 </section>
-<section id="latex-export" class="level2">
-<h2 class="anchored" data-anchor-id="latex-export">LaTeX export</h2>
-</section>
 <section id="linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regression">Linear regression</h2>
 <p>The point of this class is not to teach you much about linear regression. The baseline model is:</p>
@@ -275,7 +306,7 @@ Exercise
 y_i = \alpha + \beta x_i + e_i
 \]</span></p>
 <p>The obtained coefficient in this model gives the correlation between <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span>. Under specific conditions (notably, see the Gauss-Markov theorem), it is possible to draw causal conclusions on the impact of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>, but this is beyond the scope of this class.</p>
-<p>The base function for linear regression is <code>lm(y ~ x, data)</code>. However, I highlight a much more powerful and flexible package, either to regress but also to export results, <code>fixest</code>, which works with the same syntax and allows to implement so many more linear models and extensions.</p>
+<p>The base function for linear regression is <code>lm(y ~ x, data)</code>. However, I highlight a much more powerful and flexible package, either to regress but also to export results, <code>fixest::feols()</code>, which works with the same syntax and allows to implement so many more linear models and extensions.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -293,7 +324,94 @@ Exercise
 </ol>
 </div>
 </div>
-<p>To export, we rely on…</p>
+</section>
+<section id="export-to-.tex" class="level2">
+<h2 class="anchored" data-anchor-id="export-to-.tex">Export to <code>.tex</code></h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are not familiar with LaTeX, I more than warmly recommand you to learn it!! The learning curve is extremely steep, it shouldn’t take you more than a couple of hours to understand the base of it. The online community is superb and LLMs are extremely efficient at it. A good starting point is to use Overleaf and follow their guide to <a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes">learn LaTeX in 30 minutes</a>.</p>
+</div>
+</div>
+<p>Several libraries exist to export tables as <code>.tex</code> format (or in plain text, or in html). Among the most popular packages, we are going to use <code>stargazer</code>, which is super flexible and well-suited for descriptive statistics, <code>knitr</code> which is helpful to export data frames, and the <code>etable</code> function from <code>fixest</code>.</p>
+<ol type="1">
+<li>Export the count of population</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Export the population </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stargazer</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        pop_dep,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">summary =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Population by department (2021)"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">label   =</span> <span class="st">"tab:pop"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">covariate.labels =</span> <span class="fu">c</span>(<span class="st">"Dep."</span>, <span class="st">"Population"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">notes =</span> <span class="st">"Source: INSEE, Recensement Permanent (2021)."</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">out =</span> <span class="fu">paste0</span>(path,<span class="st">"/output/pop_dep.tex"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s break down together the function!</p>
+<ol start="2" type="1">
+<li>Export the rent data</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export the housing cost by city size</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>      cost_size <span class="ot">=</span> cost_size <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">city_size =</span> <span class="fu">recode</span>(city_size,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"1_vsmall"</span> <span class="ot">=</span> <span class="st">"Very Small"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"2_small"</span>  <span class="ot">=</span> <span class="st">"Small"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"3_medium"</span> <span class="ot">=</span> <span class="st">"Medium"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"4_large"</span>  <span class="ot">=</span> <span class="st">"Large"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"5_vlarge"</span> <span class="ot">=</span> <span class="st">"Very Large"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        )) <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">recode</span>(type,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"appartement"</span> <span class="ot">=</span> <span class="st">"Appart."</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"house"</span>       <span class="ot">=</span> <span class="st">"House"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">as.numeric</span>(<span class="fu">round</span>(.x, <span class="dv">2</span>))))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Export with knitr </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      export <span class="ot">=</span> cost_size <span class="sc">%&gt;%</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">city_size =</span> <span class="fu">factor</span>(city_size, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Very Small"</span>, <span class="st">"Small"</span>, <span class="st">"Medium"</span>, <span class="st">"Large"</span>, <span class="st">"Very Large"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">arrange</span>(city_size, type) <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">city_size =</span> <span class="st">""</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(type, mean, q1, q2, q3) <span class="sc">%&gt;%</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="st">"latex"</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>, <span class="at">longtable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">hspace{1em}"</span>, <span class="st">"Type"</span>, <span class="st">"Mean"</span>, <span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add group rows for each city_size</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="st">"Very Small"</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">latex_gap_space =</span> <span class="st">"0.5em"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="st">"Small"</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="at">latex_gap_space =</span> <span class="st">"0.5em"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="st">"Medium"</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="at">latex_gap_space =</span> <span class="st">"0.5em"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="st">"Large"</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="at">latex_gap_space =</span> <span class="st">"0.5em"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="st">"Very Large"</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="at">latex_gap_space =</span> <span class="st">"0.5em"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"hold_position"</span>))</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">writeLines</span>(export, <span class="fu">paste0</span>(path,<span class="st">"/output/cost_size.tex"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s break down the function.</p>
+<ol start="3" type="1">
+<li>Export the regressions</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Export the two regressions with etable</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">setFixest_dict</span>(<span class="fu">c</span>(<span class="at">popmun =</span> <span class="st">"Population"</span>, <span class="at">log_popmun =</span> <span class="st">"Population (log)"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">loy_appartement =</span> <span class="st">"Rent"</span>, <span class="at">log_loy_appartement =</span> <span class="st">"Rent (log)"</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      ))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      export <span class="ot">=</span> <span class="fu">etable</span>(reg, <span class="at">tex =</span> T, <span class="at">style.tex =</span> <span class="fu">style.tex</span>(<span class="st">"aer"</span>), <span class="at">fitstat =</span> <span class="sc">~</span> r2 <span class="sc">+</span> n)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">writeLines</span>(export, <span class="fu">paste0</span>(path,<span class="st">"/output/reg.tex"</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      export <span class="ot">=</span> <span class="fu">etable</span>(reg_log, <span class="at">tex =</span> T, <span class="at">style.tex =</span> <span class="fu">style.tex</span>(<span class="st">"aer"</span>), <span class="at">fitstat =</span> <span class="sc">~</span> r2 <span class="sc">+</span> n)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">writeLines</span>(export, <span class="fu">paste0</span>(path,<span class="st">"/output/reg_log.tex"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
@@ -389,7 +507,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/mateomoglia\.github\.io\/2026_eco51432ep\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

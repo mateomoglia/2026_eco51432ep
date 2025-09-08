@@ -348,8 +348,8 @@ Note
 <p>In <code>dplyr</code>, the merging is done through the <code>joint</code> functions. A join between a <code>df1</code> and a <code>df2</code> has to be done on at least one joining variable. There are several types of joints:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 66%">
+<col style="width: 34%">
+<col style="width: 65%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -401,10 +401,10 @@ Note
 <section id="reshape-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="reshape-datasets">Reshape datasets</h3>
 <p>Data manipulation also goes with reshaping the datasets. Let’s say a dataset contains the population at the municipal level. The first column is the municipality ID and each other column in the population for a given year, such that: <code>codgeo</code>, <code>pop1999</code>, <code>pop2000</code>, until <code>pop2023</code>.</p>
-<p>To obtain a panel dataset (multiple IDs observed multiple times), we need to reshape the datasets in <strong>long format</strong> (as opposed to wide). The <code>dplyr</code> function is <code>pivot_longer()</code>.</p>
+<p>To obtain a panel dataset (multiple IDs observed multiple times), we need to reshape the datasets in <strong>long format</strong> (as opposed to wide). The function is <code>pivot_longer()</code>. This function is from the library <code>tidyr</code>. <strong>You need to download it first and load it</strong>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">=</span> data_wide <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"pop"</span>), <span class="co"># Might have used -codgeo</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"year"</span>,         <span class="co"># New col name</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"population"</span>,  <span class="co"># New col name</span></span>
@@ -412,15 +412,15 @@ Note
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.integer</span>(year)) <span class="co"># Not necessary, but usually year is numeric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The counterpart function is <code>pivot_wider()</code>.</p>
+<p>The counterpart function is <code>tidyr::pivot_wider()</code>.</p>
 </section>
 <section id="other-manipulations" class="level3">
 <h3 class="anchored" data-anchor-id="other-manipulations">Other manipulations</h3>
 <p>In <code>dplyr</code>, it is possible to manipulate data using the following functions:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 66%">
+<col style="width: 34%">
+<col style="width: 65%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -471,12 +471,13 @@ Exercise
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Open the population dataset <code>/raw/idf_pop.csv</code> and check if is clean</li>
-<li>Describe it</li>
+<li>Create a subset containing only <code>codgeo</code> and the columns that start with <code>popmun</code></li>
 <li>Make it long with <code>codgeo</code> as the ID and a <code>year</code> column</li>
 <li>Extract the most recent year (ideally, using a function)</li>
 <li>Open the housing cost dataset <code>raw/idf_rents.csv</code></li>
-<li>Merge the population and the housing cost datasets on municipality ID</li>
-<li>Save the newly merged dataset in <code>.csv</code> in an appropriate subfolder</li>
+<li>Create a dataset with 3 columns: <code>codgeo</code>, <code>loy_sqm_appartment</code> and <code>loy_sqm_house</code></li>
+<li>Merge the population datasets (population in the most recent year and the population by CSP) and the housing cost datasets on municipality ID</li>
+<li>Save the newly merged dataset in <code>.csv</code> in an appropriate subfolder.</li>
 </ol>
 <p>This latter dataset will be our main dataset for the rest of the class.</p>
 </div>

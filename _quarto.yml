@@ -11,13 +11,15 @@ website:
       - text: "Home"
         href: home.qmd
       - text: "First hand on R"
-        href: part0_R.qmd
+        href: part0_r.qmd
       - text: "Open data"
         href: part1_data.qmd
       - text: "Descriptive statistics"
         href: part2_desc.qmd
       - text: "Data visualization"
         href: part3_viz.qmd
+      - text: "Spatial data"
+        href: part4_spatial.qmd
   page-footer:
     right: "Built with [Quarto](https://quarto.org/)"
     left: "&copy; Copyright 2026, Mateo Moglia"

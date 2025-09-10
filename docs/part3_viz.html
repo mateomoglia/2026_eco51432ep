@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./part0_R.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./part0_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">First hand on R</span></a>
   </div>
 </li>
@@ -160,6 +160,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Data visualization</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./part4_spatial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial data</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -173,8 +179,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#plots-with-ggplot2" id="toc-plots-with-ggplot2" class="nav-link" data-scroll-target="#plots-with-ggplot2">Plots with <code>ggplot2</code></a>
   <ul class="collapse">
   <li><a href="#general-description" id="toc-general-description" class="nav-link" data-scroll-target="#general-description">General description</a></li>
-  <li><a href="#more-details" id="toc-more-details" class="nav-link" data-scroll-target="#more-details">More details</a></li>
+  <li><a href="#to-export" id="toc-to-export" class="nav-link" data-scroll-target="#to-export">To export</a></li>
   </ul></li>
+  <li><a href="#standard-graphs" id="toc-standard-graphs" class="nav-link" data-scroll-target="#standard-graphs">Standard graphs</a>
+  <ul class="collapse">
+  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link" data-scroll-target="#scatter-plot">Scatter plot</a></li>
+  <li><a href="#bar-charts" id="toc-bar-charts" class="nav-link" data-scroll-target="#bar-charts">Bar charts</a></li>
+  <li><a href="#box-plots" id="toc-box-plots" class="nav-link" data-scroll-target="#box-plots">Box plots</a></li>
+  <li><a href="#density-plots" id="toc-density-plots" class="nav-link" data-scroll-target="#density-plots">Density plots</a></li>
+  </ul></li>
+  <li><a href="#adding" id="toc-adding" class="nav-link" data-scroll-target="#adding">Adding</a></li>
   </ul>
 </nav>
     </div>
@@ -205,12 +219,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this part, we are going to learn how to:</p>
 <ul>
 <li>Make appealing data visualization with <code>ggplot2</code> package</li>
-<li>If time allows: make maps</li>
-<li>If time allows: make interactive plots</li>
 </ul>
 </section>
 <section id="plots-with-ggplot2" class="level2">
 <h2 class="anchored" data-anchor-id="plots-with-ggplot2">Plots with <code>ggplot2</code></h2>
+<p>We are going, by practicing over several plots, to make -hopefully- appealing data visualization. We are going to take advantage of the<code>/temp/idf_data.csv</code> we built earlier on., <code>monu_histo.csv</code> containing the list of all monuments listed in Ile-de-France with the zip code, <code>gares.shp</code> listing all stations in the Île-de-France train network, with their associated location.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>      path <span class="ot">=</span> <span class="st">"C:/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(dplyr) <span class="co"># Load the dplyr package</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(ggplot2) <span class="co"># Make graphs</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(tidyr) <span class="co"># To manipulate data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(plotly) <span class="co"># Interactive graphs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    last_plot</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>      <span class="fu">library</span>(sf) <span class="co"># For spatial data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.12.2, GDAL 3.9.3, PROJ 9.4.1; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Open the data ----------------------------------------------------------</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Data were created before and saved under /temp/idf_data.csv</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      idf_data <span class="ot">=</span> <span class="fu">read.csv2</span>(<span class="fu">paste0</span>(path,<span class="st">"/temp/idf_data.csv"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">log_loy_appartement =</span> <span class="fu">log</span>(loy_appartement),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">log_loy_house       =</span> <span class="fu">log</span>(loy_house),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">log_popmun =</span> <span class="fu">log</span>(popmun))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="general-description" class="level3">
 <h3 class="anchored" data-anchor-id="general-description">General description</h3>
 <p>This package is a workhorse of data visualization in R. The structure is somewhat similar to the <code>dplyr</code> approach. The idea is to apply to a <code>ggplot()</code> object a series of functions to add elements to the plot and control the appearance of the latter. The syntax requires:</p>
@@ -224,16 +275,250 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Usually, the <code>ggplot</code> function takes two main arguments and one to many sub-arguments. The two main arguments are (i) the data on which the visualization is required and (ii) an <strong>aesthetic</strong>. The aesthetic controls the key element of the visualization, such as the <code>x</code> and <code>y</code> axes or the grouping colors/linetypes.</p>
 <p>Let’s imagine we have a dataset <code>df</code> with <code>x_val</code> and <code>y_val</code> values and a grouping variable (gender, country, etc.). Hence, to plot a scatter plot, we would code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x_val, <span class="at">y =</span> y_val, <span class="at">colour =</span> gender)) <span class="sc">+</span> <span class="co"># Set the graph</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># Add points</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="co"># Control the general appearance of the graph</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> x_val, <span class="at">y =</span> y_val, <span class="at">colour =</span> gender)) <span class="sc">+</span> <span class="co"># Set the graph</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># Add points</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="co"># Control the general appearance of the graph</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="more-details" class="level3">
-<h3 class="anchored" data-anchor-id="more-details">More details</h3>
-
-
+<section id="to-export" class="level3">
+<h3 class="anchored" data-anchor-id="to-export">To export</h3>
+<p>The standard way to save plot created with <code>ggplot()</code> is to use the function <code>ggsave()</code>. It takes several arguments:</p>
+<ul>
+<li><code>plot</code>: by default, it saves the latest plot (opened in the Plots pane) or the ggplot object created</li>
+<li><code>path</code>: the path where to save the plot. Do not forget the extension! For instance, <code>.pdf</code>, <code>.jpg</code>, etc.</li>
+<li><code>dpi</code>: the quality of the plot (I use <code>dpi=300</code> as a trade-off between lisibility and size)</li>
+<li><code>width</code> and <code>height</code>: the width and the height of the created object</li>
+<li><code>unit</code>: the unit for width and height (inches, pixels, centimeters)</li>
+</ul>
 </section>
+</section>
+<section id="standard-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="standard-graphs">Standard graphs</h2>
+<section id="scatter-plot" class="level3">
+<h3 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h3>
+<p>In the previous section, we tried to understand the relationship between rents and population size at the municipal level. As we use bivariate analysis, a data visualisation is useful to provide intuition.</p>
+<p>To make a very standard graph:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">x =</span> loy_house, <span class="at">y =</span> popmun)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This graph suffers from two issues: it is not visually appealing nor clear and it is not readable. We are going to take advantage of the power and high flexibility of the <code>ggplot</code> package to increase the quality of the graph. Moreover, we are going to use logged variables to make the data more visually appealing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">x =</span> log_loy_house, <span class="at">y =</span> log_popmun)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now that graph is more readble, we can plot several columns at once. Here, the <code>aes()</code> for <code>y</code> is the same for all layers (two layers of points), so keep it in the main <code>ggplot()</code> options. FOr each layer, we specify for <code>x</code> but also for <code>colour</code>. Each group we defined is going to be a specific colour.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">y =</span> log_popmun)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_appartement, <span class="at">colour =</span> <span class="st">"Appartement"</span>)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_house, <span class="at">colour =</span> <span class="st">"House"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>R applies the standard color scheme. Colours can be chosen manually (we will see that after) or thanks to a scale from a package. The most popular package is <code>viridis</code> which provides a lot of pallettes for <code>ggplot</code>. It is especially useful as those palettes are suited for colourblind people (more than a tenth of the population!). Because we set the aes colour, we use scale_colour_viridis_d(). The <code>d</code> stands for discrete, as opposed to continuous.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">y =</span> log_popmun)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_appartement, <span class="at">colour =</span> <span class="st">"Appartement"</span>)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_house, <span class="at">colour =</span> <span class="st">"House"</span>)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="co"># </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>R offers a number of built-in “themes” to control the general appearance of the graph (backgroud, axes, minor grids, etc.). Here, I use <code>theme_bw()</code>. You can try: <code>theme_minimal()</code>, <code>theme_classic()</code>, <code>theme_void()</code>. Instead of using <code>viridis</code>, I set manually the colour for each group I defined.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">y =</span> log_popmun)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_appartement, <span class="at">colour =</span> <span class="st">"Appartement"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_house, <span class="at">colour =</span> <span class="st">"House"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"House"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Appartement"</span> <span class="ot">=</span> <span class="st">"navy"</span>)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I do not like the legend on the right of the graph, I want it inside the plot region. Here, it is important to set the <code>theme()</code> control <em>after</em> the <code>theme_bw()</code> because it overwrites it (as most command on R).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">y =</span> log_popmun)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_appartement, <span class="at">colour =</span> <span class="st">"Appartement"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_house, <span class="at">colour =</span> <span class="st">"House"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"House"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Appartement"</span> <span class="ot">=</span> <span class="st">"navy"</span>)) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.15</span>,<span class="fl">0.9</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title    =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2
+3.5.0.
+ℹ Please use the `legend.position.inside` argument of `theme()` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To stick with the publication standard, I adapt the names of the axes and the title of the graph.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">y =</span> log_popmun)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_appartement, <span class="at">colour =</span> <span class="st">"Appartement"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_house, <span class="at">colour =</span> <span class="st">"House"</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"House"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Appartement"</span> <span class="ot">=</span> <span class="st">"navy"</span>)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.15</span>,<span class="fl">0.9</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title    =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Rent (log)"</span>, <span class="at">y =</span> <span class="st">"Population (log)"</span>, <span class="at">title =</span> <span class="st">"Correlation between rents and population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>One additional graph, plotting the relationship we presented in the previous section. The layer for regression lines is <code>geom_smooth</code>. I also play with the location, the size, and the centeredness, of the title.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(idf_data, <span class="fu">aes</span>(<span class="at">y =</span> log_popmun, <span class="at">x =</span> log_loy_house)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log_loy_house), <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"darkgray"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Rent (log)"</span>, <span class="at">y =</span> <span class="st">"Population (log)"</span>, <span class="at">title =</span> <span class="st">"Correlation between rents and population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="part3_viz_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="bar-charts">Bar charts</h3>
+<p>In the population data, we know the number of each CSP (socio-professional categories) in the population. Our first exercise will be to make a bar chart out of those data, with the average share of each CSP.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Using <code>tidyr::pivot_wider()</code>, create a <em>long</em> dataframe containing, per municipality, the count of each CSP.</li>
+<li>By CSP, summarize the count of each CSP across all cities.</li>
+<li>Compute the share of each CSP.</li>
+</ol>
+<p>My data looks like that:</p>
+<pre><code># A tibble: 6 × 4
+  csp      pop_csp      pop share_csp
+  &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 agri       5600. 9654776.  0.000580
+2 autsap  1860539. 9654776.  0.193   
+3 cadre   1900614. 9654776.  0.197   
+4 employ  1576028. 9654776.  0.163   
+5 ouvri    824251. 9654776.  0.0854  
+6 profint 1581987. 9654776.  0.164  </code></pre>
+<ol start="4" type="1">
+<li>Using <code>geom_col()</code>, make a barchart. To add colour, use <code>fill = csp</code>. Store the graph in an object. Export it as <code>.pdf</code>.</li>
+</ol>
+</div>
+</div>
+<p>Because the <code>csp</code> column has information that are not straightfoward to interpret, I use the following commands to manually adapt the labels on the <code>x</code> axis. With <code>theme</code> it is possible to add a bit of angle to make it more readable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> p <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"agri"</span><span class="ot">=</span><span class="st">"Agriculture"</span>, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"cadre"</span><span class="ot">=</span><span class="st">"Executives"</span>, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"profint"</span><span class="ot">=</span><span class="st">"Intermediate"</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"employ"</span><span class="ot">=</span><span class="st">"Employees"</span>, </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"ouvri"</span><span class="ot">=</span><span class="st">"Workers"</span>, </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"retraite"</span><span class="ot">=</span><span class="st">"Retired"</span>, </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"autsap"</span><span class="ot">=</span><span class="st">"Other inactive"</span>)) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">15</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using the function <code>plotly::ggplotly(p, tooltip = "text")</code>, make it interactive!</p>
+</section>
+<section id="box-plots" class="level3">
+<h3 class="anchored" data-anchor-id="box-plots">Box plots</h3>
+<p>For each CSP, what is the distribution of the count across municipalities? Use the layer <code>geom_boxplot()</code> to know it!</p>
+</section>
+<section id="density-plots" class="level3">
+<h3 class="anchored" data-anchor-id="density-plots">Density plots</h3>
+<p>Another way to possibility to grasp on the distribution is to use a density plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>idf_data <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(agri,cadre,profint,employ,ouvri,retraite,autsap),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">names_to =</span> <span class="st">"csp"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">values_to =</span> <span class="st">"pop_csp"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">share_csp =</span> pop_csp<span class="sc">/</span>popmun) <span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(csp <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ouvri"</span>,<span class="st">"retraite"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> share_csp, <span class="at">fill =</span> csp)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.8</span>,<span class="fl">0.7</span>),</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend.title    =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"ouvri"</span> <span class="ot">=</span> <span class="st">"#440154"</span>, <span class="st">"retraite"</span> <span class="ot">=</span> <span class="st">"#21908C"</span>),</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>                          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"ouvri"</span> <span class="ot">=</span> <span class="st">"Blue collar"</span>, <span class="st">"retraite"</span> <span class="ot">=</span> <span class="st">"Retired"</span>)) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Share in population"</span>, <span class="at">y =</span> <span class="st">"Density"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The density function is computed across all areas. What if we make a density plot per departement.</p>
+<ol type="1">
+<li>Add a column <code>dep</code> to the dataset (as the first two characters of <code>codgeo</code>)</li>
+<li>Add a the command <code>facet_wrap(~dep)</code> to the previous density plot</li>
+<li>Interpret!</li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="adding" class="level2">
+<h2 class="anchored" data-anchor-id="adding">Adding</h2>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -327,7 +612,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/mateomoglia\.github\.io\/2026_eco51432ep\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

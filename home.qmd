@@ -37,10 +37,13 @@ This website will walk you through the tutorials for the *Introduction to R* cou
     -   Linear regression
 -   Part 3: Data visualization
     -   Scatter plots
-    -   Bar and pie charts
+    -   Bar charts
     -   Linear regression
+    -   Density and box plots
+-   Part 4: Spatial data manipulation
+    -   Shapefiles
+    -   Compute distances
     -   Maps
-    -   Interactive plots
 
 During sessions, I will walk you through all materials covered here. I provide some exercises that you are required to perform.
 

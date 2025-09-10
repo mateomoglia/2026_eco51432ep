@@ -113,7 +113,7 @@ Because R is an objet-based language, you can manipulate several datasets within
 In `dplyr`, the merging is done through the `joint` functions. A join between a `df1` and a `df2` has to be done on at least one joining variable. There are several types of joints:
 
 | Join Type | Description |
-|-------------------------|-----------------------------------------------|
+|-------------------------|----------------------------------------------|
 | `inner_join()` | Returns rows with matching keys in both tables |
 | `left_join()` | Returns all rows from the left table, with matches from the right if present |
 | `right_join()` | Returns all rows from the right table, with matches from the left if present |
@@ -164,7 +164,7 @@ The counterpart function is `tidyr::pivot_wider()`.
 In `dplyr`, it is possible to manipulate data using the following functions:
 
 | Function | Description |
-|-------------------------|-----------------------------------------------|
+|-------------------------|----------------------------------------------|
 | `filter()` | Selects rows based on logical conditions (eg, keep Ile de France) |
 | `select()` | Chooses columns by name |
 | `arrange()` | Reorders rows based on column values |

@@ -23,10 +23,29 @@ invisible(lapply(packages, library, character.only = TRUE))
 In this part, we are going to learn how to:
 
 -   Make appealing data visualization with `ggplot2` package
--   If time allows: make maps
--   If time allows: make interactive plots
 
 ## Plots with `ggplot2`
+
+We are going, by practicing over several plots, to make -hopefully- appealing data visualization. We are going to take advantage of the`/temp/idf_data.csv` we built earlier on., `monu_histo.csv` containing the list of all monuments listed in Ile-de-France with the zip code, `gares.shp` listing all stations in the Île-de-France train network, with their associated location.
+
+```{r, echo = T, eval = T}
+
+      path = "C:/Users/mateomoglia/Dropbox/courses/polytechnique/2026_eco51432ep"
+      
+      library(dplyr) # Load the dplyr package
+      library(ggplot2) # Make graphs
+      library(tidyr) # To manipulate data
+      library(plotly) # Interactive graphs
+      library(sf) # For spatial data
+
+      # Open the data ----------------------------------------------------------
+      # Data were created before and saved under /temp/idf_data.csv
+      
+      idf_data = read.csv2(paste0(path,"/temp/idf_data.csv")) %>%
+        mutate(log_loy_appartement = log(loy_appartement),
+               log_loy_house       = log(loy_house),
+               log_popmun = log(popmun))
+```
 
 ### General description 
 
@@ -48,5 +67,180 @@ ggplot(df, mapping = aes(x = x_val, y = y_val, colour = gender)) + # Set the gra
     theme_void() # Control the general appearance of the graph
 ```
 
-### More details
+### To export 
 
+The standard way to save plot created with `ggplot()` is to use the function `ggsave()`. It takes several arguments:
+
+-   `plot`: by default, it saves the latest plot (opened in the Plots pane) or the ggplot object created
+-   `path`: the path where to save the plot. Do not forget the extension! For instance, `.pdf`, `.jpg`, etc.
+-   `dpi`: the quality of the plot (I use `dpi=300` as a trade-off between lisibility and size)
+-   `width` and `height`: the width and the height of the created object
+-   `unit`: the unit for width and height (inches, pixels, centimeters)
+
+## Standard graphs
+
+### Scatter plot
+
+In the previous section, we tried to understand the relationship between rents and population size at the municipal level. As we use bivariate analysis, a data visualisation is useful to provide intuition. 
+
+To make a very standard graph:
+
+```{r, echo = T, eval = T}
+ggplot(idf_data, aes(x = loy_house, y = popmun)) +
+  geom_point()
+```
+
+This graph suffers from two issues: it is not visually appealing nor clear and it is not readable. We are going to take advantage of the power and high flexibility of the `ggplot` package to increase the quality of the graph. Moreover, we are going to use logged variables to make the data more visually appealing.
+
+```{r, echo = T, eval = T}
+ggplot(idf_data, aes(x = log_loy_house, y = log_popmun)) +
+        geom_point()
+```
+
+Now that graph is more readble, we can plot several columns at once. Here, the `aes()` for `y` is the same for all layers (two layers of points), so keep it in the main `ggplot()` options. FOr each layer, we specify for `x` but also for `colour`. Each group we defined is going to be a specific colour. 
+
+```{r, echo = T, eval = T}  
+ggplot(idf_data, aes(y = log_popmun)) +
+  geom_point(aes(x = log_loy_appartement, colour = "Appartement")) +
+  geom_point(aes(x = log_loy_house, colour = "House"))
+```
+
+R applies the standard color scheme. Colours can be chosen manually (we will see that after) or thanks to a scale from a package. The most popular package is `viridis` which provides a lot of pallettes for `ggplot`. It is especially useful as those palettes are suited for colourblind people (more than a tenth of the population!). Because we set the aes colour, we use scale_colour_viridis_d(). The `d` stands for discrete, as opposed to continuous. 
+
+```{r, echo = T, eval = T}      
+ggplot(idf_data, aes(y = log_popmun)) +
+  geom_point(aes(x = log_loy_appartement, colour = "Appartement")) +
+  geom_point(aes(x = log_loy_house, colour = "House")) +
+  scale_color_viridis_d() # 
+```
+
+R offers a number of built-in "themes" to control the general appearance of the graph (backgroud, axes, minor grids, etc.). Here, I use `theme_bw()`. You can try: `theme_minimal()`, `theme_classic()`, `theme_void()`. Instead of using `viridis`, I set manually the colour for each group I defined. 
+
+```{r, echo = T, eval = T}     
+ggplot(idf_data, aes(y = log_popmun)) +
+  geom_point(aes(x = log_loy_appartement, colour = "Appartement"), alpha = 0.5) +
+  geom_point(aes(x = log_loy_house, colour = "House"), alpha = 0.5) +
+  scale_color_manual(values = c("House" = "red", "Appartement" = "navy")) +
+  theme_bw()
+```
+
+I do not like the legend on the right of the graph, I want it inside the plot region. Here, it is important to set the `theme()` control _after_ the `theme_bw()` because it overwrites it (as most command on R). 
+
+```{r, echo = T, eval = T}      
+ggplot(idf_data, aes(y = log_popmun)) +
+  geom_point(aes(x = log_loy_appartement, colour = "Appartement"), alpha = 0.5) +
+  geom_point(aes(x = log_loy_house, colour = "House"), alpha = 0.5) +
+  scale_color_manual(values = c("House" = "red", "Appartement" = "navy")) +
+  theme_bw() +
+  theme(legend.position = c(0.15,0.9),
+        legend.title    = element_blank())
+```
+
+To stick with the publication standard, I adapt the names of the axes and the title of the graph. 
+
+```{r, echo = T, eval = T}      
+ggplot(idf_data, aes(y = log_popmun)) +
+  geom_point(aes(x = log_loy_appartement, colour = "Appartement"), alpha = 0.5) +
+  geom_point(aes(x = log_loy_house, colour = "House"), alpha = 0.5) +
+  scale_color_manual(values = c("House" = "red", "Appartement" = "navy")) +
+  theme_bw() +
+  theme(legend.position = c(0.15,0.9),
+        legend.title    = element_blank()) +
+  labs(x = "Rent (log)", y = "Population (log)", title = "Correlation between rents and population")
+```
+
+One additional graph, plotting the relationship we presented in the previous section. The layer for regression lines is `geom_smooth`. I also play with the location, the size, and the centeredness, of the title.
+
+```{r, echo = T, eval = T}      
+ggplot(idf_data, aes(y = log_popmun, x = log_loy_house)) +
+  geom_point(aes(x = log_loy_house), colour = "red", alpha = 0.5) +
+  geom_smooth(method = "lm", colour = "black") +
+  theme_classic() +
+  theme(panel.grid.major = element_line(colour = "darkgray", linetype = "dashed"),
+        panel.grid.minor = element_blank(),
+        plot.title=element_text(colour = "black", face = "bold", hjust = 0.5, size = 14)) +
+  labs(x = "Rent (log)", y = "Population (log)", title = "Correlation between rents and population")
+```
+
+### Bar charts 
+
+In the population data, we know the number of each CSP (socio-professional categories) in the population. Our first exercise will be to make a bar chart out of those data, with the average share of each CSP.
+
+::: callout-tip
+## Exercise
+
+1.  Using `tidyr::pivot_wider()`, create a _long_ dataframe containing, per municipality, the count of each CSP. 
+2.  By CSP, summarize the count of each CSP across all cities.
+3.  Compute the share of each CSP.
+
+My data looks like that:
+
+```
+# A tibble: 6 × 4
+  csp      pop_csp      pop share_csp
+  <chr>      <dbl>    <dbl>     <dbl>
+1 agri       5600. 9654776.  0.000580
+2 autsap  1860539. 9654776.  0.193   
+3 cadre   1900614. 9654776.  0.197   
+4 employ  1576028. 9654776.  0.163   
+5 ouvri    824251. 9654776.  0.0854  
+6 profint 1581987. 9654776.  0.164  
+```
+
+4.  Using `geom_col()`, make a barchart. To add colour, use `fill = csp`. Store the graph in an object. Export it as `.pdf`. 
+
+:::
+
+Because the `csp` column has information that are not straightfoward to interpret, I use the following commands to manually adapt the labels on the `x` axis. With `theme` it is possible to add a bit of angle to make it more readable. 
+
+```{r, eval = F, echo = T}
+p = p +
+  scale_x_discrete(labels = c("agri"="Agriculture", 
+                                      "cadre"="Executives", 
+                                      "profint"="Intermediate", 
+                                      "employ"="Employees", 
+                                      "ouvri"="Workers", 
+                                      "retraite"="Retired", 
+                                      "autsap"="Other inactive")) +
+  theme(axis.text.x = element_text(angle = 15, hjust = 1)) 
+```
+
+Using the function `plotly::ggplotly(p, tooltip = "text")`, make it interactive!
+
+### Box plots
+
+For each CSP, what is the distribution of the count across municipalities? Use the layer `geom_boxplot()` to know it!
+
+### Density plots
+
+Another way to possibility to grasp on the distribution is to use a density plot:
+
+```{r, echo = T, eval = F}
+idf_data %>%
+        tidyr::pivot_longer(cols = c(agri,cadre,profint,employ,ouvri,retraite,autsap),
+                            names_to = "csp",
+                            values_to = "pop_csp") %>%
+        mutate(share_csp = pop_csp/popmun) %>%
+        filter(csp %in% c("ouvri","retraite")) %>%
+        ggplot(aes(x = share_csp, fill = csp)) +
+        geom_density(alpha = 0.5) +
+        theme_classic() +
+        theme(legend.position = c(0.8,0.7),
+              legend.title    = element_blank()) +
+        scale_fill_manual(values = c("ouvri" = "#440154", "retraite" = "#21908C"),
+                          labels = c("ouvri" = "Blue collar", "retraite" = "Retired")) +
+        labs(x = "Share in population", y = "Density") 
+```
+
+:::callout-tip
+## Exercise
+
+The density function is computed across all areas. What if we make a density plot per departement.
+
+1.  Add a column `dep` to the dataset (as the first two characters of `codgeo`)
+2.  Add a the command `facet_wrap(~dep)` to the previous density plot
+3.  Interpret!
+
+:::
+
+## Adding 

@@ -16,6 +16,8 @@ This website will walk you through the tutorials for the *Introduction to R* cou
 >
 > **Rules**: Send me an email if you miss the class. You are grown-up adults, I trust you to follow thoroughly the class. Do not hesitate to work in small groups.
 >
+> **Data**: Data are [here](https://drive.google.com/drive/folders/1mNXjRVWK4-5ZcgrYdNgevgxV25byMHPL?usp=sharing)
+>
 > **Evaluation**: There is no evaluation.
 
 ::: {.callout-caution collapse="true"}
